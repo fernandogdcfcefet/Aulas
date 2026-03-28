@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1525791733 source:e:\questao 3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+

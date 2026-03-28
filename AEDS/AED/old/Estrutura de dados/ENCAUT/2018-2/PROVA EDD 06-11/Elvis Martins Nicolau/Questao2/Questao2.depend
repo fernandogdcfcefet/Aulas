@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1541514642 source:e:\elvis martins nicolau\questao2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+

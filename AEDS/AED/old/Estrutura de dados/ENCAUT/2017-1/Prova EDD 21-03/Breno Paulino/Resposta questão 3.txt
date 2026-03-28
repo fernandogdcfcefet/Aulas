@@ -1,0 +1,1 @@
+A linha 23 compara o nome da rua de duas pessoas pessoas, e evita que uma pessoa seja comparada com ela mesma.

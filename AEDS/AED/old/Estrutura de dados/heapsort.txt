@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+ 
+void siftDown( int vet[], int start, int end)
+{
+    int root = start,aux;
+
+    while ( root*2+1 < end ) {
+        int child = 2*root + 1;
+        if ((child + 1 < end) && vet[child]<vet[child+1]) {
+            child++;
+        }
+        if (vet[root]< vet[child]) {
+            aux=vet[child];
+            vet[child]=vet[root];
+            vet[root]=aux;
+            root = child;
+        }
+        else
+            return;
+    }
+}
+
+void heapsort( int vet[], int n)
+{
+    int start, end, aux;
+
+    /* heapify */
+    for (start = (n-2)/2; start >=0; start--) {
+        siftDown( vet, start, n);
+    }
+
+    for (end=n-1; end > 0; end--) {
+        aux=vet[end];
+        vet[end]=vet[0];
+        vet[0]=aux;
+        siftDown(vet, 0, end);
+    }
+}

@@ -1,0 +1,5 @@
+5.	(5,0 pontos) Implemente uma classe em Java para controlar as notas dos aluno da disciplina de Algoritmos e Estruturas de Dados. A classe deve conter como atributos privados um vetor de inteiros para armazenar as notas dos alunos (cada posição do vetor corresponde à nota de um aluno) e um atributo para controlar a quantidade de elementos do vetor. A classe deve conter os seguintes métodos:
+a)	Construtor para instanciar o vetor com um tamanho e inicializar o atributo que controla a quantidade de elementos do vetor com valor zero;
+b)	Um método para inserir a nota do aluno, informada por parâmetro, na primeira posição vazia do vetor.
+c)	É necessário um método que permita alterar a nota do aluno, informando por parâmetros o valor da nova nota e a posição do vetor referente ao aluno.
+d)	É necessário também um método que retorne a maior nota dentre todos os alunos.

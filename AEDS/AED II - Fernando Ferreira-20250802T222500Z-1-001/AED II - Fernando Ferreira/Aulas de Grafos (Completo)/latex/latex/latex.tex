@@ -1,0 +1,73 @@
+
+\documentclass{beamer}
+\usepackage{beamerthemeshadow}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{etex}
+\usepackage[all,knot,arc,frame,matrix,arrow,graph,curve,color]{xy}
+\usepackage{amssymb}
+\usepackage{leftidx}
+\usepackage{graphics}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+
+
+
+\newxyColor{pink}{1.0 0.4 0.5}{rgb}{}
+
+\begin{document}
+
+
+\title{Teoria de Grafos para Computação}  
+\subtitle{(Algoritmos\footnote{Alguns algoritmos baseados em http://www.ic.uff.br/\~celso/})}
+\author{Prof. Silvio Jamil F. Guimarães}
+\date{2010-2} 
+
+\frame{\titlepage} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%==================================SLIDE=========================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\frame{\frametitle{Table of contents}\tableofcontents} 
+
+%\section{Matriz de incidência}
+\begin{frame}{Caminhamento em grafos}
+\begin{block}{Busca em profundidade}
+Caminha no grafo visitando todos os seus vértices sempre procurando o vértice mais profundo.
+\end{block}
+\begin{block}{Busca em largura}
+Expandir o conjunto de vértices de forma uniforme em que são visitados todos os vértices de mesma distância ao início antes de visitar outros níveis.
+\end{block}
+
+
+\only<1>{
+\begin{block}{}
+\[\xygraph{
+!{<0cm,0cm>;<1.0cm,0cm>:<0cm,1.0cm>::}
+!{( 0, 0)}*+[o][F-]{c}="c"
+!{( 0, 1)}*+[o][F-]{a}="a"
+!{(1.0,1)}*+[o][F-]{e}="e"
+!{(1,-0.5)}*+[o][F-]{d}="d"
+!{(-1,-0.5)}*+[o][F-]{b}="b"
+  "a":"b" "a":"c" "a":"d"
+  "c":"b" "c":"d" "e":"d"
+}\]
+\end{block}
+}
+
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

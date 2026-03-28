@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1541518179 source:e:\Álvaro bastos de almeia pinheiro\pilha\main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+

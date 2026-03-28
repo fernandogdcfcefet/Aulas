@@ -1,0 +1,13 @@
+typedef struct{
+ char rua[20];
+
+}endereco;
+
+typedef struct{
+  char nome[20];
+  int telefone;
+  endereco end; 
+
+}pessoa;
+
+linha 23 do programa: nesta linha o programa compara as pessoas que moram na mesma rua , na primeira parte ele compara o nome da rua da pessoa na posição i com o nome da rua da pessoa na posição j, na segunda parte ele compara o nome da pessoa na posição i com a pessoa na posição j caso eles sejam iguais o programa não faz nada, se forem diferentes o programa passa para a instrução de printf.

@@ -1,0 +1,12 @@
+int pesquisa(int vet[],int chave,int esq,int dir){
+    int pivo = (dir+esq)/2;
+    if(chave==vet[pivo]){
+        return pivo;
+    }else if((dir==esq)||(dir<esq)){
+        return -1;
+    }else if(chave>vet[pivo]){
+        return pesquisa(vet,chave,pivo+1,dir);
+    }else if(chave<vet[pivo]){
+        return pesquisa(vet,chave,esq,pivo-1);
+    }
+}

@@ -1,0 +1,1 @@
+Tynt.sc({"ap":"Read more: ","b":true,"ba":["/"]})

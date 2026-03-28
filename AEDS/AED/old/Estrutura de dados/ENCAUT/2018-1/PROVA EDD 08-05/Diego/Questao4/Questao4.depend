@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1525801145 source:e:\prova estrutra\questao4\main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+

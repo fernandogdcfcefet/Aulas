@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define TAM 6
+
+void imprime(int vet[]){
+    int i;
+    printf("[");
+    for(i=0;i<TAM;i++){
+        printf("%d ",vet[i]);
+    }
+    printf("]\n");
+}
+
+void imprimeQuick(char vet[], int esq,int dir){
+    int i;
+    printf("[");
+     for(i=0;i<esq;i++){
+        printf("- ",vet[i]);
+    }
+    for(i=esq;i<=dir;i++){
+        printf("%c ",vet[i]);
+    }
+     for(i=dir+1;i<TAM;i++){
+        printf("- ",vet[i]);
+    }
+    printf("]\n");
+}
+void shellSort(int vet[], int size) {
+    int i , j , value;
+    int gap = 1;
+    while(gap < size) {
+        gap = 3*gap+1;
+    }
+    while ( gap > 1) {
+        gap /= 3;
+        for(i = gap; i < size; i++) {
+            value = vet[i];
+            j = i - gap;
+            while (j >= 0 && value < vet[j]) {
+                vet [j + gap] = vet[j];
+                j -= gap;
+            }
+            vet [j + gap] = value;
+        }
+    }
+}
+void Particao(int Esq, int Dir , int * i , int * j , char A[])
+{
+    int x , w;
+    *i = Esq; *j = Dir;
+    x = A[(*i + *j)/2]; /* obtem o pivo x */
+    do
+    {
+        while (x > A[*i]) (*i)++;
+        while (x < A[*j]) (*j)--;
+        if(* i <= * j ){
+            w = A[*i];
+            A[*i] = A[*j];
+            A[*j] = w;
+            (*i)++; (*j)--;
+            imprimeQuick(A,Esq,Dir);
+        }
+    } while (*i<= *j);
+}
+void Ordena(int Esq, int Dir , char A[])
+{
+    int i , j ;
+    Particao(Esq, Dir , &i , &j , A) ;
+    if (Esq < j ) Ordena(Esq, j , A) ;
+    if ( i < Dir ) Ordena( i , Dir , A) ;
+}
+void QuickSort(char A[], int n)
+{
+    Ordena(0 , n-1, A) ;//n eh o numero de elementos do vetor
+}
+
+int main()
+{
+//    int vet[]={9,27,8,0,5,6};
+char vet[]="ordena";
+//    shellSort(vet,6);
+    QuickSort(vet,6);
+    imprime(vet);
+
+}

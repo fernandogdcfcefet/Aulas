@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1711542579 source:/alunos/MATEUS AUGUSTO/Questao1/main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+

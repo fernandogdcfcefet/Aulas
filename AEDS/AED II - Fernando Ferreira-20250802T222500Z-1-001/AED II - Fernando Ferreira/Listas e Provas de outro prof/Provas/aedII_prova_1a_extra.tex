@@ -1,0 +1,156 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Trabalho de Sistemas Distribuídos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,brazil, a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preambulo - Configuração de página
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{color}
+\usepackage[portuges]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[ansinew]{inputenc}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{epsfig}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\usepackage{tikz}
+\usetikzlibrary{3d}
+\usetikzlibrary{calc,decorations.pathmorphing} % noisy shapes
+\usetikzlibrary{fit}					% fitting shapes to coordinates
+\usetikzlibrary{backgrounds}	% drawing the background after the foreground
+\usetikzlibrary{shadows}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{positioning,shapes,shadows,arrows}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+\usetikzlibrary{arrows,shapes}
+
+\pagestyle{empty}
+
+% Define margem no topo como sendo 1,7 cm
+\setlength{\topmargin}{0pt}
+\setlength{\voffset}{-1.8cm}
+
+%define margem inferior como 1,5 cm
+\setlength{\textheight}{25,6cm}
+
+%define margens laterais como sendo 1,5 cada
+\setlength{\oddsidemargin}{0cm}
+\setlength{\hoffset}{-1.2cm}
+\setlength{\textwidth}{18cm}
+
+%Define campo com sombreamento cinza
+\newcolumntype{G}{>{\columncolor[gray]{0.8}[\tabcolsep]\tiny \bf \sf}p{13pt}<{\centering}}
+\newcolumntype{T}{>{\tiny \sf}p{13pt}<{\centering}}
+
+
+\usepackage{xcolor}
+\definecolor{verde}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+\lstset{
+	language=c,
+	basicstyle=\ttfamily\small, 
+	keywordstyle=\color{blue}, 
+	stringstyle=\color{verde}, 
+	commentstyle=\color{red}, 
+	extendedchars=true, 
+	showspaces=false, 
+	showstringspaces=false, 
+	numbers=left,
+	numberstyle=\tiny,
+	breaklines=true, 
+	backgroundcolor=\color{green!10},
+	breakautoindent=true, 
+	captionpos=b,
+	xleftmargin=0pt,
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inicio do documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+	\selectlanguage{brazil}
+	
+	\hspace{-0.8cm} \begin{tabular*}{18cm}{p{2cm}p{12cm}@{\extracolsep{\fill}}}
+		\multirow{2}{2cm}{\epsfig{file=puclogo_small_bw,width=1.5cm}}
+		&  \vspace{1mm} \usefont{T1}{cmss}{bx}{n} {\centering \footnotesize PONTIFÍCIA UNIVERSIDADE CATÓLICA DE MINAS GERAIS }\\
+		&  \usefont{T1}{cmss}{x}{n} Instituto de Ciências Exatas e Informática \vspace{3mm}  \\
+	\end{tabular*}
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Define caracteristicas da disciplina
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hspace{-0.8cm} \begin{tabular*}{18.5cm}{|p{7cm}@{\extracolsep{\fill}}|p{6cm} p{1.7cm}|}
+		\hline
+		\sf Disciplina & \sf Professor  &  \\
+		
+		\multicolumn{1}{|r|}{Algoritmos e Estruturas de Dados} &
+		\multicolumn{2}{c|}{Kleber Jacques F. de Souza (klebersouza@pucminas.br)} \\ \hline
+		
+	\end{tabular*}
+	
+	
+	\vspace{0.1cm}
+	
+	
+	\begin{center}
+		{\Large \bf Questão Extra - 5,0 pontos extra} \\
+		%{\normalsize \bf em dupla}
+	\end{center}
+	
+
+%===================================================================================================
+
+
+Em diversas competições, como a Olimpíada Brasileira de Informática (OBI), uma certa quantidade de competidores se classifica de uma fase para a fase seguinte, garantindo uma das vagas disponíveis. Entretanto, normalmente essa quantidade é variável, pois dada uma certa quantidade mínima de classificados, é frequente que haja empate na última vaga de classificação. Neste caso, é comum que todos os competidores na última colocação se classifiquem.
+
+Sua tarefa é ajudar a calcular o número de competidores classificados para a próxima fase. Você receberá como entrada uma lista de pontuações obtida pelos competidores e o número mínimo de vagas para a fase seguinte e você deve decidir quantos competidores de fato vão se classificar.
+
+\textbf{Entrada}
+A primeira linha de entrada contém um número inteiro  N, 1 $\leq$ N $\leq$ 1000, representando o número de competidores. A segunda linha conterá um inteiro K, 1 $\leq$ K $\leq$ N, indicando o número de competidores que devem se classificar para a próxima fase. Em seguida, N linhas conterão, cada uma um número de 1 e 1000, inclusive, correspondente a pontuação de um competidor.
+
+\textbf{Saída}
+Seu programa deve imprimir uma linha, contendo o número de classificados para a próxima fase.
+
+\textbf{Exemplo de Entrada 1}\\
+10\\
+3\\
+1\\
+2\\
+3\\
+4\\
+5\\
+5\\
+4\\
+3\\
+2\\
+1\\
+
+\textbf{Exemplo de Saída 1}\\
+4\\
+
+\textbf{Exemplo de Entrada 2}\\
+5\\
+2\\
+500\\
+500\\
+500\\
+500\\
+500\\
+
+\textbf{Exemplo de Saída 2}\\
+5
+
+
+%===================================================================================================
+
+\end{document}

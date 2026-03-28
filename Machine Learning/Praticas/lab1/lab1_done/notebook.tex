@@ -1,0 +1,1447 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Predicting+house+prices}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Fire up libraries}\label{fire-up-libraries}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+\end{Verbatim}
+
+
+    \section{Load some house sales data}\label{load-some-house-sales-data}
+
+Dataset is from house sales in King County, the region where the city of
+Seattle, WA is located.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{sales} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{home\PYZus{}data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{sales}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}            id             date   price  bedrooms  bathrooms  sqft\_living  \textbackslash{}
+        0  7129300520  20141013T000000  221900         3       1.00         1180   
+        1  6414100192  20141209T000000  538000         3       2.25         2570   
+        2  5631500400  20150225T000000  180000         2       1.00          770   
+        3  2487200875  20141209T000000  604000         4       3.00         1960   
+        4  1954400510  20150218T000000  510000         3       2.00         1680   
+        
+           sqft\_lot  floors  waterfront  view     {\ldots}      grade  sqft\_above  \textbackslash{}
+        0      5650     1.0           0     0     {\ldots}          7        1180   
+        1      7242     2.0           0     0     {\ldots}          7        2170   
+        2     10000     1.0           0     0     {\ldots}          6         770   
+        3      5000     1.0           0     0     {\ldots}          7        1050   
+        4      8080     1.0           0     0     {\ldots}          8        1680   
+        
+           sqft\_basement  yr\_built  yr\_renovated  zipcode      lat     long  \textbackslash{}
+        0              0      1955             0    98178  47.5112 -122.257   
+        1            400      1951          1991    98125  47.7210 -122.319   
+        2              0      1933             0    98028  47.7379 -122.233   
+        3            910      1965             0    98136  47.5208 -122.393   
+        4              0      1987             0    98074  47.6168 -122.045   
+        
+           sqft\_living15  sqft\_lot15  
+        0           1340        5650  
+        1           1690        7639  
+        2           2720        8062  
+        3           1360        5000  
+        4           1800        7503  
+        
+        [5 rows x 21 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{sales}\PY{p}{[}\PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1839920160}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}                id             date   price  bedrooms  bathrooms  sqft\_living  \textbackslash{}
+        11860  1839920160  20140714T000000  432000         3        2.0         1870   
+        
+               sqft\_lot  floors  waterfront  view     {\ldots}      grade  sqft\_above  \textbackslash{}
+        11860      7080     1.0           0     0     {\ldots}          7        1210   
+        
+               sqft\_basement  yr\_built  yr\_renovated  zipcode      lat     long  \textbackslash{}
+        11860            660      1969             0    98034  47.7244 -122.179   
+        
+               sqft\_living15  sqft\_lot15  
+        11860           1620        8000  
+        
+        [1 rows x 21 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{sales}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} Index(['id', 'date', 'price', 'bedrooms', 'bathrooms', 'sqft\_living',
+               'sqft\_lot', 'floors', 'waterfront', 'view', 'condition', 'grade',
+               'sqft\_above', 'sqft\_basement', 'yr\_built', 'yr\_renovated', 'zipcode',
+               'lat', 'long', 'sqft\_living15', 'sqft\_lot15'],
+              dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{sales}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} (21613, 21)
+\end{Verbatim}
+            
+    \section{Exploring the data for housing
+sales}\label{exploring-the-data-for-housing-sales}
+
+    The house price is correlated with the number of square feet of living
+space.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{on}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Create a simple regression model of sqft\_living to
+price}\label{create-a-simple-regression-model-of-sqft_living-to-price}
+
+    Split data into training and testing.\\
+We use random\_state=200 so that everyone running this notebook gets the
+same results. In practice, you may set a random seed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{sales}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{frac}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+        \PY{n}{test\PYZus{}data}  \PY{o}{=} \PY{n}{sales}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(17290, 21) (4323, 21)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{train\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}                id             date   price  bedrooms  bathrooms  sqft\_living  \textbackslash{}
+         11860  1839920160  20140714T000000  432000         3       2.00         1870   
+         12446  6705850140  20141009T000000  750000         4       2.75         3170   
+         10556   924069190  20140819T000000  440000         3       1.75         2000   
+         4828   3211270170  20140523T000000  404000         4       3.00         4060   
+         3502   9523103001  20141013T000000  389000         2       1.00          850   
+         
+                sqft\_lot  floors  waterfront  view     {\ldots}      grade  sqft\_above  \textbackslash{}
+         11860      7080     1.0           0     0     {\ldots}          7        1210   
+         12446      7634     2.0           0     0     {\ldots}         10        3170   
+         10556     11880     2.0           0     0     {\ldots}          8        2000   
+         4828      35621     1.0           0     0     {\ldots}          9        2030   
+         3502       3276     1.0           0     0     {\ldots}          6         850   
+         
+                sqft\_basement  yr\_built  yr\_renovated  zipcode      lat     long  \textbackslash{}
+         11860            660      1969             0    98034  47.7244 -122.179   
+         12446              0      1992             0    98075  47.5774 -122.054   
+         10556              0      1979             0    98075  47.5882 -122.052   
+         4828            2030      1989             0    98092  47.3059 -122.108   
+         3502               0      1910             0    98103  47.6742 -122.350   
+         
+                sqft\_living15  sqft\_lot15  
+         11860           1620        8000  
+         12446           2940        7846  
+         10556           1820       15120  
+         4828            2950       35259  
+         3502            1460        4100  
+         
+         [5 rows x 21 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}             id             date    price  bedrooms  bathrooms  sqft\_living  \textbackslash{}
+         3   2487200875  20141209T000000   604000         4        3.0         1960   
+         4   1954400510  20150218T000000   510000         3        2.0         1680   
+         5   7237550310  20140512T000000  1225000         4        4.5         5420   
+         17  6865200140  20140529T000000   485000         4        1.0         1600   
+         18    16000397  20141205T000000   189000         2        1.0         1200   
+         
+             sqft\_lot  floors  waterfront  view     {\ldots}      grade  sqft\_above  \textbackslash{}
+         3       5000     1.0           0     0     {\ldots}          7        1050   
+         4       8080     1.0           0     0     {\ldots}          8        1680   
+         5     101930     1.0           0     0     {\ldots}         11        3890   
+         17      4300     1.5           0     0     {\ldots}          7        1600   
+         18      9850     1.0           0     0     {\ldots}          7        1200   
+         
+             sqft\_basement  yr\_built  yr\_renovated  zipcode      lat     long  \textbackslash{}
+         3             910      1965             0    98136  47.5208 -122.393   
+         4               0      1987             0    98074  47.6168 -122.045   
+         5            1530      2001             0    98053  47.6561 -122.005   
+         17              0      1916             0    98103  47.6648 -122.343   
+         18              0      1921             0    98002  47.3089 -122.210   
+         
+             sqft\_living15  sqft\_lot15  
+         3            1360        5000  
+         4            1800        7503  
+         5            4760      101930  
+         17           1610        4300  
+         18           1060        5095  
+         
+         [5 rows x 21 columns]
+\end{Verbatim}
+            
+    \subsection{Build the regression model using only sqft\_living as a
+feature}\label{build-the-regression-model-using-only-sqft_living-as-a-feature}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{simple\PYZus{}model} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{simple\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{on}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{simple\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Let's show what our predictions look
+like}\label{lets-show-what-our-predictions-look-like}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{test\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{test\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{simple\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{on}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Evaluate the simple model}\label{evaluate-the-simple-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{rmse}\PY{p}{(}\PY{n}{predictions}\PY{p}{,} \PY{n}{targets}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{predictions} \PY{o}{\PYZhy{}} \PY{n}{targets}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{intercept:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{simple\PYZus{}model}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coefficients:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{simple\PYZus{}model}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} The mean squared error}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RMSE: }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{rmse}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+intercept: [-46493.04519733] coefficients: [[ 282.27187583]]
+RMSE: 254323.39
+
+    \end{Verbatim}
+
+    RMSE of about \$254.323,39
+
+    \section{Explore other features in the
+data}\label{explore-other-features-in-the-data}
+
+To build a more elaborate model, we will explore using more features.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{my\PYZus{}features} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bedrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}lot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{sales}\PY{p}{[}\PY{n}{my\PYZus{}features}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}            bedrooms     bathrooms   sqft\_living      sqft\_lot        floors  \textbackslash{}
+         count  21613.000000  21613.000000  21613.000000  2.161300e+04  21613.000000   
+         mean       3.370842      2.114757   2079.899736  1.510697e+04      1.494309   
+         std        0.930062      0.770163    918.440897  4.142051e+04      0.539989   
+         min        0.000000      0.000000    290.000000  5.200000e+02      1.000000   
+         25\%        3.000000      1.750000   1427.000000  5.040000e+03      1.000000   
+         50\%        3.000000      2.250000   1910.000000  7.618000e+03      1.500000   
+         75\%        4.000000      2.500000   2550.000000  1.068800e+04      2.000000   
+         max       33.000000      8.000000  13540.000000  1.651359e+06      3.500000   
+         
+                     zipcode  
+         count  21613.000000  
+         mean   98077.939805  
+         std       53.505026  
+         min    98001.000000  
+         25\%    98033.000000  
+         50\%    98065.000000  
+         75\%    98118.000000  
+         max    98199.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}sales.show(view=\PYZsq{}BoxWhisker Plot\PYZsq{}, x=\PYZsq{}zipcode\PYZsq{}, y=\PYZsq{}price\PYZsq{})}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{on}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    98039 is the most expensive zip code.
+
+    \section{Build a regression model with more
+features}\label{build-a-regression-model-with-more-features}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}my\PYZus{}features\PYZus{}model = (train\PYZus{}data,target=\PYZsq{}price\PYZsq{},features=my\PYZus{}features,validation\PYZus{}set=None)}
+         \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}data}\PY{p}{[}\PY{n}{my\PYZus{}features}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{my\PYZus{}features}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{mult\PYZus{}model} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mult\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \subsection{Comparing the results of the simple model with adding more
+features}\label{comparing-the-results-of-the-simple-model-with-adding-more-features}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{test\PYZus{}data}\PY{p}{[}\PY{n}{my\PYZus{}features}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{my\PYZus{}features}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{test\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{mult\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{intercept:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mult\PYZus{}model}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coefficients:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mult\PYZus{}model}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} The mean squared error}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RMSE: }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{rmse}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+intercept: [-56348418.9495597] coefficients: [[ -6.17445455e+04   1.88053371e+04   3.17237961e+02  -2.88006880e-01
+   -9.68870610e+03   5.75218487e+02]]
+RMSE: 249311.90
+
+    \end{Verbatim}
+
+    The RMSE goes down from \$254.323,39 to \$228.024,43 with more features.
+
+    \section{Apply learned models to predict prices of 3
+houses}\label{apply-learned-models-to-predict-prices-of-3-houses}
+
+    The first house we will use is considered an "average" house in Seattle.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{house1} \PY{o}{=} \PY{n}{sales}\PY{p}{[}\PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{5309101200}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{house1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:}               id             date   price  bedrooms  bathrooms  sqft\_living  \textbackslash{}
+         1054  5309101200  20140605T000000  620000         4       2.25         2400   
+         
+               sqft\_lot  floors  waterfront  view     {\ldots}      grade  sqft\_above  \textbackslash{}
+         1054      5350     1.5           0     0     {\ldots}          7        1460   
+         
+               sqft\_basement  yr\_built  yr\_renovated  zipcode      lat    long  \textbackslash{}
+         1054            940      1929             0    98117  47.6763 -122.37   
+         
+               sqft\_living15  sqft\_lot15  
+         1054           1250        4880  
+         
+         [1 rows x 21 columns]
+\end{Verbatim}
+            
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{house1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1054    620000
+Name: price, dtype: int64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{simple\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{house1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 630959.4568039]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{mult\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{house1}\PY{p}{[}\PY{n}{my\PYZus{}features}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 630924.33807747]]
+
+    \end{Verbatim}
+
+    In this case, the model with more features provides a worse prediction
+than the simpler model with only 1 feature. However, on average, the
+model with more features is better.
+
+    \subsection{Prediction for a second, fancier
+house}\label{prediction-for-a-second-fancier-house}
+
+We will now examine the predictions for a fancier house.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{house2} \PY{o}{=} \PY{n}{sales}\PY{p}{[}\PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1925069082}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{house2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:}               id             date    price  bedrooms  bathrooms  sqft\_living  \textbackslash{}
+         1361  1925069082  20150511T000000  2200000         5       4.25         4640   
+         
+               sqft\_lot  floors  waterfront  view     {\ldots}      grade  sqft\_above  \textbackslash{}
+         1361     22703     2.0           1     4     {\ldots}          8        2860   
+         
+               sqft\_basement  yr\_built  yr\_renovated  zipcode      lat     long  \textbackslash{}
+         1361           1780      1952             0    98052  47.6393 -122.097   
+         
+               sqft\_living15  sqft\_lot15  
+         1361           3140       14200  
+         
+         [1 rows x 21 columns]
+\end{Verbatim}
+            
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{house2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1361    2200000
+Name: price, dtype: int64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{simple\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{house2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 1263248.45867172]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{mult\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{house2}\PY{p}{[}\PY{n}{my\PYZus{}features}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 1270172.16078085]]
+
+    \end{Verbatim}
+
+    In this case, the model with more features provides a better prediction.
+This behavior is expected here, because this house is more
+differentiated by features that go beyond its square feet of living
+space, especially the fact that it's a waterfront house.
+
+    \subsection{Last house, super fancy}\label{last-house-super-fancy}
+
+Our last house is a very large one owned by a famous Seattleite.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{bill\PYZus{}gates} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bedrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{,} 
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{25}\PY{p}{]}\PY{p}{,} 
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{50000}\PY{p}{]}\PY{p}{,} 
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}lot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{225000}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} 
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{98039}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,} 
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterfront}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{view}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}above}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{37500}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}basement}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{12500}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yr\PYZus{}built}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{1994}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yr\PYZus{}renovated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{2010}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mf}{47.627606}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{long}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{122.242054}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living15}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{5000}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}lot15}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{40000}\PY{p}{]}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{simple\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{bill\PYZus{}gates}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 14067100.74649497]]
+
+    \end{Verbatim}
+
+    The model predicts a price of over \$14M for this house! But we expect
+the house to cost much more. (There are very few samples in the dataset
+of houses that are this fancy, so we don't expect the model to capture a
+perfect prediction here.)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{mult\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{bill\PYZus{}gates}\PY{p}{)}\PY{p}{[}\PY{n}{my\PYZus{}features}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 15779944.98847022]]
+
+    \end{Verbatim}
+
+    \section{Answers}\label{answers}
+
+    \section{1 - Selection and summary
+statistics}\label{selection-and-summary-statistics}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{n}{tamanho} \PY{o}{=} \PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{maximo} \PY{o}{=} \PY{l+m+mf}{0.0}
+          \PY{n}{media} \PY{o}{=} \PY{l+m+mf}{0.0}
+          \PY{n}{cep} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{tamanho}\PY{p}{)}\PY{p}{:}
+              \PY{n}{media} \PY{o}{=} \PY{n}{sales}\PY{p}{[}\PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+              \PY{k}{if} \PY{n}{media} \PY{o}{\PYZgt{}} \PY{n}{maximo}\PY{p}{:}
+                  \PY{n}{maximo} \PY{o}{=} \PY{n}{media}
+                  \PY{n}{cep} \PY{o}{=} \PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                  
+          \PY{n}{sales}\PY{p}{[}\PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{cep}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}107}]:}                id             date    price  bedrooms  bathrooms  sqft\_living  \textbackslash{}
+          2974   3625049014  20140829T000000  2950000         4       3.50         4860   
+          3761   2540700110  20150212T000000  1905000         4       3.50         4210   
+          4077   3262300940  20141107T000000   875000         3       1.00         1220   
+          4078   3262300940  20150210T000000   940000         3       1.00         1220   
+          4149   6447300265  20141014T000000  4000000         4       5.50         7080   
+          4411   2470100110  20140804T000000  5570000         5       5.75         9200   
+          4791   2210500019  20150324T000000   937500         3       1.00         1320   
+          5178   6447300345  20150406T000000  1160000         4       3.00         2680   
+          5589   6447300225  20141106T000000  1880000         3       2.75         2620   
+          5880   2525049148  20141007T000000  3418800         5       5.00         5450   
+          6868   3262300235  20141126T000000  1555000         5       2.50         2870   
+          7501   2525049133  20150402T000000  1398000         5       2.25         2640   
+          8241   3262301355  20140725T000000  1320000         3       2.75         2680   
+          9254   9208900037  20140919T000000  6885000         6       7.75         9890   
+          9694   3262301610  20141118T000000   865000         3       1.50         1530   
+          9809   5426300060  20141008T000000  1000000         3       2.25         2300   
+          11278  3025300226  20140515T000000  2100000         4       1.75         3550   
+          11952  2260300060  20150410T000000  2575000         5       3.00         4780   
+          12295  3738000070  20150309T000000  1712750         5       2.50         2660   
+          12811  5425700150  20140804T000000   787500         4       1.75         1580   
+          13235  3262300322  20150408T000000  1651000         4       3.25         3640   
+          13267  5425700205  20140520T000000  1800000         4       3.50         4460   
+          13419  2525049246  20141017T000000  1550000         2       2.25         2950   
+          13621  2525049266  20140821T000000  1762000         3       2.25         3060   
+          13988  5427110040  20140609T000000  1225000         4       2.50         2740   
+          14052  7397300220  20140529T000000  2750000         4       3.25         4430   
+          14254  2425049107  20150305T000000  1950000         4       3.75         4150   
+          14385  2425049061  20140825T000000  2200000         3       2.00         3570   
+          14803  3835502815  20140925T000000  1260000         3       2.50         3110   
+          15022  2210500010  20140930T000000  2450000         7       4.25         4670   
+          15255  2425049063  20140911T000000  3640900         4       3.25         4830   
+          15632  3625049088  20140702T000000  2271150         4       3.25         4040   
+          16268  3025300250  20150513T000000  1620000         4       2.25         2350   
+          16302  7397300170  20140530T000000  3710000         4       3.50         5550   
+          16377  3262300920  20150408T000000  1200000         4       3.00         2150   
+          16825  3025300095  20141009T000000  2500000         4       4.50         4300   
+          17001  2525049259  20140812T000000  2187730         4       4.50         4240   
+          17209  3025300225  20141031T000000  1450000         5       2.75         3090   
+          17230  2470200020  20140514T000000  1880000         4       2.75         3260   
+          17899  3262300555  20140708T000000  2458000         4       5.25         6500   
+          17930  3625049079  20140801T000000  1350000         3       2.00         2070   
+          18793  2525049263  20140709T000000  2680000         5       3.00         4290   
+          18892  5427100150  20140626T000000  1410000         4       2.25         3250   
+          18912  2425049066  20140616T000000  1920000         4       2.50         3070   
+          19148  3625049042  20141011T000000  3635000         5       6.00         5490   
+          19236  2525049086  20141003T000000  2720000         4       3.25         3990   
+          19351  2525049113  20140725T000000  1950000         4       3.50         4065   
+          20096  3262300485  20150421T000000  2250000         5       5.25         3410   
+          21040  6447300365  20141113T000000  2900000         5       4.00         5190   
+          21514  3262300818  20150227T000000  1865000         4       3.75         3790   
+          
+                 sqft\_lot  floors  waterfront  view     {\ldots}      grade  sqft\_above  \textbackslash{}
+          2974      23885     2.0           0     0     {\ldots}         12        4860   
+          3761      18564     2.0           0     0     {\ldots}         11        4210   
+          4077       8119     1.0           0     0     {\ldots}          7        1220   
+          4078       8119     1.0           0     0     {\ldots}          7        1220   
+          4149      16573     2.0           0     0     {\ldots}         12        5760   
+          4411      35069     2.0           0     0     {\ldots}         13        6200   
+          4791       8500     1.0           0     0     {\ldots}          7        1320   
+          5178      15438     2.0           0     2     {\ldots}          8        2680   
+          5589      17919     1.0           0     1     {\ldots}          9        2620   
+          5880      20412     2.0           0     0     {\ldots}         11        5450   
+          6868      16238     2.0           0     0     {\ldots}          8        2870   
+          7501      14959     1.0           0     0     {\ldots}          7        1770   
+          8241      20104     1.0           0     0     {\ldots}          9        1820   
+          9254      31374     2.0           0     4     {\ldots}         13        8860   
+          9694      10827     1.0           0     0     {\ldots}          8        1530   
+          9809      15952     1.0           0     0     {\ldots}          8        1150   
+          11278     19865     2.0           0     0     {\ldots}          9        3550   
+          11952     20440     1.0           0     0     {\ldots}         10        3660   
+          12295      6572     1.0           0     0     {\ldots}          9        1960   
+          12811      9382     1.0           0     0     {\ldots}          7        1080   
+          13235     13530     1.0           0     0     {\ldots}          9        2570   
+          13267     16953     1.0           0     0     {\ldots}          9        2550   
+          13419     15593     1.0           0     0     {\ldots}          8        1560   
+          13621     16000     2.0           0     0     {\ldots}         10        3060   
+          13988     16007     2.0           0     0     {\ldots}          9        2740   
+          14052     21000     2.0           0     0     {\ldots}         10        4430   
+          14254     17424     1.0           0     0     {\ldots}          9        3130   
+          14385     30456     1.0           0     1     {\ldots}          8        2070   
+          14803      9930     1.0           0     1     {\ldots}          8        1640   
+          15022     23115     2.0           0     2     {\ldots}         11        4670   
+          15255     22257     2.0           1     4     {\ldots}         11        4830   
+          15632     18916     1.0           0     0     {\ldots}          9        4040   
+          16268     17709     2.0           0     0     {\ldots}          9        2350   
+          16302     28078     2.0           0     2     {\ldots}         12        3350   
+          16377      8119     2.0           0     0     {\ldots}          8        2150   
+          16825     19844     2.0           0     0     {\ldots}         11        4300   
+          17001     13162     2.0           0     0     {\ldots}         10        4240   
+          17209     19865     1.0           0     0     {\ldots}          9        3090   
+          17230     19542     1.0           0     0     {\ldots}         10        2170   
+          17899     14986     2.0           0     0     {\ldots}         11        5180   
+          17930      9600     1.0           0     1     {\ldots}          7        1590   
+          18793     20445     2.0           0     0     {\ldots}         11        4290   
+          18892     16684     2.0           0     0     {\ldots}          9        3250   
+          18912     34412     1.0           0     3     {\ldots}          9        2070   
+          19148     19897     2.0           0     0     {\ldots}         12        5490   
+          19236     18115     2.0           0     0     {\ldots}         11        3990   
+          19351     18713     2.0           0     0     {\ldots}         10        4065   
+          20096      8118     2.0           0     0     {\ldots}         11        3410   
+          21040     14600     2.0           0     1     {\ldots}         11        5190   
+          21514      8797     2.0           0     0     {\ldots}         11        3290   
+          
+                 sqft\_basement  yr\_built  yr\_renovated  zipcode      lat     long  \textbackslash{}
+          2974               0      1996             0    98039  47.6172 -122.230   
+          3761               0      2001             0    98039  47.6206 -122.225   
+          4077               0      1955             0    98039  47.6328 -122.236   
+          4078               0      1955             0    98039  47.6328 -122.236   
+          4149            1320      2008             0    98039  47.6151 -122.224   
+          4411            3000      2001             0    98039  47.6289 -122.233   
+          4791               0      1954             0    98039  47.6187 -122.226   
+          5178               0      1902          1956    98039  47.6109 -122.226   
+          5589               0      1949             0    98039  47.6144 -122.228   
+          5880               0      2014             0    98039  47.6209 -122.237   
+          6868               0      1962             0    98039  47.6308 -122.238   
+          7501             870      1929             0    98039  47.6191 -122.234   
+          8241             860      1964             0    98039  47.6304 -122.234   
+          9254            1030      2001             0    98039  47.6305 -122.240   
+          9694               0      1955             0    98039  47.6354 -122.234   
+          9809            1150      1963             0    98039  47.6322 -122.232   
+          11278              0      1962          2002    98039  47.6236 -122.235   
+          11952           1120      1975             0    98039  47.6242 -122.239   
+          12295            700      1959             0    98039  47.6176 -122.223   
+          12811            500      1963             0    98039  47.6353 -122.232   
+          13235           1070      1924          2000    98039  47.6293 -122.238   
+          13267           1910      1962          1994    98039  47.6338 -122.232   
+          13419           1390      1942          1986    98039  47.6209 -122.236   
+          13621              0      1988             0    98039  47.6189 -122.230   
+          13988              0      1984             0    98039  47.6353 -122.229   
+          14052              0      1952          2007    98039  47.6398 -122.237   
+          14254           1020      1963          2000    98039  47.6390 -122.236   
+          14385           1500      1946          1982    98039  47.6413 -122.240   
+          14803           1470      1954             0    98039  47.6112 -122.226   
+          15022              0      1992             0    98039  47.6183 -122.227   
+          15255              0      1990             0    98039  47.6409 -122.241   
+          15632              0      1954             0    98039  47.6155 -122.238   
+          16268              0      1977             0    98039  47.6232 -122.236   
+          16302           2200      2000             0    98039  47.6395 -122.234   
+          16377              0      1953          2004    98039  47.6335 -122.236   
+          16825              0      1985          1999    98039  47.6218 -122.237   
+          17001              0      2004             0    98039  47.6193 -122.229   
+          17209              0      1953             0    98039  47.6232 -122.235   
+          17230           1090      1968             0    98039  47.6245 -122.236   
+          17899           1320      2001             0    98039  47.6304 -122.236   
+          17930            480      1946             0    98039  47.6160 -122.239   
+          18793              0      1985             0    98039  47.6217 -122.239   
+          18892              0      1979             0    98039  47.6334 -122.229   
+          18912           1000      1950             0    98039  47.6400 -122.240   
+          19148              0      2005             0    98039  47.6165 -122.236   
+          19236              0      1989             0    98039  47.6177 -122.229   
+          19351              0      1987             0    98039  47.6209 -122.237   
+          20096              0      2006             0    98039  47.6295 -122.236   
+          21040              0      2013             0    98039  47.6102 -122.225   
+          21514            500      2006             0    98039  47.6351 -122.236   
+          
+                 sqft\_living15  sqft\_lot15  
+          2974            3580       16054  
+          3761            3520       18564  
+          4077            1910        8119  
+          4078            1910        8119  
+          4149            3140       15996  
+          4411            3560       24345  
+          4791            2790       10800  
+          5178            4480       14406  
+          5589            3400       14400  
+          5880            3160       17825  
+          6868            2870       16238  
+          7501            3240       17904  
+          8241            3060       19837  
+          9254            4540       42730  
+          9694            2050       10827  
+          9809            2200       14284  
+          11278           3000       19862  
+          11952           4660       20440  
+          12295           3960       14595  
+          12811           2010        9382  
+          13235           2760       15000  
+          13267           1980       13370  
+          13419           2060       19855  
+          13621           3510       13162  
+          13988           2760       16008  
+          14052           3930       20000  
+          14254           3930       21420  
+          14385           3570       27418  
+          14803           3650       14399  
+          15022           3240       13912  
+          15255           3820       25582  
+          15632           3000       18831  
+          16268           3360       19855  
+          16302           2980       19602  
+          16377           1590        8119  
+          16825           3070       19845  
+          17001           3010       12163  
+          17209           2970       19862  
+          17230           3480       19863  
+          17899           2270        8119  
+          17930           3000       16215  
+          18793           3620       22325  
+          18892           2890       16927  
+          18912           3780       27940  
+          19148           2910       17600  
+          19236           3450       16087  
+          19351           3070       18713  
+          20096           3410       16236  
+          21040           3840       19250  
+          21514           2660       12150  
+          
+          [50 rows x 21 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{n}{maximo}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}108}]:} 2160606.6
+\end{Verbatim}
+            
+    \section{2 - Filtering data}\label{filtering-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{casas} \PY{o}{=} \PY{n}{sales}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{4000}\PY{p}{,} \PY{n}{sales}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{2000}\PY{p}{)}\PY{p}{]}
+          \PY{n}{casas}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}124}]:}                id             date    price  bedrooms  bathrooms  sqft\_living  \textbackslash{}
+          1      6414100192  20141209T000000   538000         3       2.25         2570   
+          10     1736800520  20150403T000000   662500         3       2.50         3560   
+          15     9297300055  20150124T000000   650000         4       3.00         2950   
+          21     2524049179  20140826T000000  2000000         3       2.75         3050   
+          22     7137970340  20140703T000000   285000         5       2.50         2270   
+          24     3814700200  20141120T000000   329000         3       2.25         2450   
+          26     1794500383  20140626T000000   937000         3       1.75         2450   
+          29     1873100390  20150302T000000   719000         4       2.50         2570   
+          30     8562750320  20141110T000000   580500         3       2.50         2320   
+          32      461000390  20140624T000000   687500         4       1.75         2330   
+          34     7955080270  20141203T000000   322500         4       2.75         2060   
+          35     9547205180  20140613T000000   696000         3       2.50         2300   
+          37     2768000400  20141230T000000   640000         4       2.00         2360   
+          39     2078500320  20140620T000000   605000         4       2.50         2620   
+          40     5547700270  20140715T000000   625000         4       2.50         2570   
+          42     7203220400  20140707T000000   861990         5       2.75         3595   
+          45     8035350320  20140718T000000   488000         3       2.50         3160   
+          47     4178300310  20140716T000000   785000         4       2.50         2290   
+          49      822039084  20150311T000000  1350000         3       2.50         2753   
+          51     7231300125  20150217T000000   345000         5       2.50         3150   
+          54     4217401195  20150303T000000   920000         5       2.25         2730   
+          55     9822700295  20140512T000000   885000         4       2.50         2830   
+          56     9478500640  20140819T000000   292500         4       2.50         2250   
+          57     2799800710  20150407T000000   301000         3       2.50         2420   
+          58     7922800400  20140827T000000   951000         5       3.25         3250   
+          60     1516000055  20141210T000000   650000         3       2.25         2150   
+          62     5072410070  20141021T000000   505000         3       1.75         2519   
+          65     3253500160  20141120T000000   317625         3       2.75         2770   
+          66     3394100030  20140909T000000   975000         4       2.50         2720   
+          67     3717000160  20141009T000000   287000         4       2.50         2240   
+          {\ldots}           {\ldots}              {\ldots}      {\ldots}       {\ldots}        {\ldots}          {\ldots}   
+          21537  1043000100  20141211T000000   370000         4       2.50         2531   
+          21542  3874900085  20150227T000000   715000         4       3.25         2630   
+          21544  8562770720  20150423T000000   589999         3       2.50         2140   
+          21546  9211010300  20140707T000000   509900         3       2.50         3030   
+          21548  8835770330  20140819T000000  1057000         2       1.50         2370   
+          21553  2522059251  20150409T000000   465000         3       2.50         2050   
+          21554  2855000110  20140808T000000   388000         3       2.50         2198   
+          21558  2255500123  20140820T000000   747450         3       2.50         2110   
+          21560   423059387  20141118T000000   540000         5       2.50         3370   
+          21562  2122059216  20150414T000000   422000         4       2.50         2930   
+          21563  9406530090  20141020T000000   337000         4       2.50         2470   
+          21564  7168100015  20141009T000000   579950         5       2.75         3080   
+          21565  5007500120  20150226T000000   341780         4       2.75         2260   
+          21568   524059330  20150130T000000  1700000         4       3.50         3830   
+          21571  3345700207  20150502T000000   608500         4       3.50         2850   
+          21573  8562790760  20140520T000000   785000         4       3.50         3070   
+          21575  9578500790  20141111T000000   399950         3       2.50         3087   
+          21580  7853420110  20141003T000000   594866         3       3.00         2780   
+          21581  7853420110  20150504T000000   625000         3       3.00         2780   
+          21589  7570050450  20140910T000000   347500         3       2.50         2540   
+          21591  4140940150  20141002T000000   572000         4       2.75         2770   
+          21594  5087900040  20141017T000000   350000         4       2.75         2500   
+          21596  7502800100  20140813T000000   679950         5       2.75         3600   
+          21597   191100405  20150421T000000  1575000         4       3.25         3410   
+          21598  8956200760  20141013T000000   541800         4       2.50         3118   
+          21599  7202300110  20140915T000000   810000         4       3.00         3990   
+          21603  7852140040  20140825T000000   507250         3       2.50         2270   
+          21605  3448900210  20141014T000000   610685         4       2.50         2520   
+          21606  7936000429  20150326T000000  1007500         4       3.50         3510   
+          21609  6600060120  20150223T000000   400000         4       2.50         2310   
+          
+                 sqft\_lot  floors  waterfront  view     {\ldots}      grade  sqft\_above  \textbackslash{}
+          1          7242     2.0           0     0     {\ldots}          7        2170   
+          10         9796     1.0           0     0     {\ldots}          8        1860   
+          15         5000     2.0           0     3     {\ldots}          9        1980   
+          21        44867     1.0           0     4     {\ldots}          9        2330   
+          22         6300     2.0           0     0     {\ldots}          8        2270   
+          24         6500     2.0           0     0     {\ldots}          8        2450   
+          26         2691     2.0           0     0     {\ldots}          8        1750   
+          29         7173     2.0           0     0     {\ldots}          8        2570   
+          30         3980     2.0           0     0     {\ldots}          8        2320   
+          32         5000     1.5           0     0     {\ldots}          7        1510   
+          34         6659     1.0           0     0     {\ldots}          7        1280   
+          35         3060     1.5           0     0     {\ldots}          8        1510   
+          37         6000     2.0           0     0     {\ldots}          8        2360   
+          39         7553     2.0           0     0     {\ldots}          8        2620   
+          40         5520     2.0           0     0     {\ldots}          9        2570   
+          42         5639     2.0           0     0     {\ldots}          9        3595   
+          45        13603     2.0           0     0     {\ldots}          8        3160   
+          47        13416     2.0           0     0     {\ldots}          9        2290   
+          49        65005     1.0           1     2     {\ldots}          9        2165   
+          51         9134     1.0           0     0     {\ldots}          8        1640   
+          54         6000     1.5           0     0     {\ldots}          8        2130   
+          55         5000     2.0           0     0     {\ldots}          9        2830   
+          56         4495     2.0           0     0     {\ldots}          7        2250   
+          57         4750     2.0           0     0     {\ldots}          8        2420   
+          58        14342     2.0           0     4     {\ldots}          8        3250   
+          60        21235     1.0           0     3     {\ldots}          8        1590   
+          62         8690     2.0           0     0     {\ldots}          8        2519   
+          65         3809     1.5           0     0     {\ldots}          7        1770   
+          66        11049     2.0           0     0     {\ldots}         10        2720   
+          67         4648     2.0           0     0     {\ldots}          7        2240   
+          {\ldots}         {\ldots}     {\ldots}         {\ldots}   {\ldots}     {\ldots}        {\ldots}         {\ldots}   
+          21537      6843     2.0           0     0     {\ldots}          8        2531   
+          21542      7770     2.0           0     0     {\ldots}          9        2630   
+          21544      3628     2.0           0     0     {\ldots}          8        1960   
+          21546      9053     2.0           0     0     {\ldots}          8        3030   
+          21548    184231     2.0           0     0     {\ldots}         11        2370   
+          21553     15035     2.0           0     0     {\ldots}          9        2050   
+          21554      6222     2.0           0     2     {\ldots}          8        2198   
+          21558      1339     2.0           0     0     {\ldots}          8        1410   
+          21560      4850     2.0           0     0     {\ldots}          9        3370   
+          21562      5973     2.0           0     0     {\ldots}         10        2930   
+          21563      5100     2.0           0     0     {\ldots}          8        2470   
+          21564      5752     2.0           0     0     {\ldots}          9        3080   
+          21565      4440     2.0           0     0     {\ldots}          7        2260   
+          21568      8963     2.0           0     0     {\ldots}         10        3120   
+          21571      5577     2.0           0     0     {\ldots}          8        1950   
+          21573      4684     2.0           0     0     {\ldots}         10        2190   
+          21575      5002     2.0           0     0     {\ldots}          8        3087   
+          21580      6000     2.0           0     0     {\ldots}          9        2780   
+          21581      6000     2.0           0     0     {\ldots}          9        2780   
+          21589      4760     2.0           0     0     {\ldots}          8        2540   
+          21591      3852     2.0           0     0     {\ldots}          8        2770   
+          21594      5995     2.0           0     0     {\ldots}          8        2500   
+          21596      9437     2.0           0     0     {\ldots}          9        3600   
+          21597     10125     2.0           0     0     {\ldots}         10        3410   
+          21598      7866     2.0           0     2     {\ldots}          9        3118   
+          21599      7838     2.0           0     0     {\ldots}          9        3990   
+          21603      5536     2.0           0     0     {\ldots}          8        2270   
+          21605      6023     2.0           0     0     {\ldots}          9        2520   
+          21606      7200     2.0           0     0     {\ldots}          9        2600   
+          21609      5813     2.0           0     0     {\ldots}          8        2310   
+          
+                 sqft\_basement  yr\_built  yr\_renovated  zipcode      lat     long  \textbackslash{}
+          1                400      1951          1991    98125  47.7210 -122.319   
+          10              1700      1965             0    98007  47.6007 -122.145   
+          15               970      1979             0    98126  47.5714 -122.375   
+          21               720      1968             0    98040  47.5316 -122.233   
+          22                 0      1995             0    98092  47.3266 -122.169   
+          24                 0      1985             0    98030  47.3739 -122.172   
+          26               700      1915             0    98119  47.6386 -122.360   
+          29                 0      2005             0    98052  47.7073 -122.110   
+          30                 0      2003             0    98027  47.5391 -122.070   
+          32               820      1929             0    98117  47.6823 -122.368   
+          34               780      1981             0    98058  47.4276 -122.157   
+          35               790      1930          2002    98115  47.6827 -122.310   
+          37                 0      1904             0    98107  47.6702 -122.362   
+          39                 0      1996             0    98056  47.5301 -122.180   
+          40                 0      2000             0    98074  47.6145 -122.027   
+          42                 0      2014             0    98053  47.6848 -122.016   
+          45                 0      2003             0    98019  47.7443 -121.977   
+          47                 0      1981             0    98007  47.6194 -122.151   
+          49               588      1953             0    98070  47.4041 -122.451   
+          51              1510      1966             0    98056  47.4934 -122.189   
+          54               600      1927             0    98105  47.6571 -122.281   
+          55                 0      1995             0    98105  47.6597 -122.290   
+          56                 0      2008             0    98042  47.3663 -122.114   
+          57                 0      2003             0    98042  47.3663 -122.122   
+          58                 0      1968             0    98008  47.5880 -122.116   
+          60               560      1959             0    98166  47.4336 -122.339   
+          62                 0      1973             0    98166  47.4428 -122.344   
+          65              1000      1925             0    98144  47.5747 -122.304   
+          66                 0      1989             0    98004  47.5815 -122.192   
+          67                 0      2005             0    98001  47.3378 -122.257   
+          {\ldots}              {\ldots}       {\ldots}           {\ldots}      {\ldots}      {\ldots}      {\ldots}   
+          21537              0      2013             0    98030  47.3850 -122.189   
+          21542              0      2014             0    98126  47.5459 -122.377   
+          21544            180      2006             0    98027  47.5370 -122.074   
+          21546              0      2009             0    98059  47.4945 -122.149   
+          21548              0      2005             0    98045  47.4543 -121.778   
+          21553              0      2006             0    98042  47.3619 -122.122   
+          21554              0      2010             0    98198  47.3906 -122.304   
+          21558            700      2014             0    98122  47.6088 -122.311   
+          21560              0      2007             0    98056  47.5078 -122.169   
+          21562              0      2008             0    98030  47.3846 -122.186   
+          21563              0      2005             0    98038  47.3622 -122.041   
+          21564              0      2014             0    98059  47.4922 -122.153   
+          21565              0      2014             0    98001  47.3507 -122.291   
+          21568            710      2014             0    98004  47.5990 -122.197   
+          21571            900      2014             0    98056  47.5252 -122.192   
+          21573            880      2009             0    98027  47.5316 -122.076   
+          21575              0      2014             0    98023  47.2974 -122.349   
+          21580              0      2013             0    98065  47.5184 -121.886   
+          21581              0      2013             0    98065  47.5184 -121.886   
+          21589              0      2010             0    98038  47.3452 -122.022   
+          21591              0      2014             0    98178  47.5001 -122.232   
+          21594              0      2008             0    98042  47.3749 -122.107   
+          21596              0      2014             0    98059  47.4822 -122.131   
+          21597              0      2007             0    98040  47.5653 -122.223   
+          21598              0      2014             0    98001  47.2931 -122.264   
+          21599              0      2003             0    98053  47.6857 -122.046   
+          21603              0      2003             0    98065  47.5389 -121.881   
+          21605              0      2014             0    98056  47.5137 -122.167   
+          21606            910      2009             0    98136  47.5537 -122.398   
+          21609              0      2014             0    98146  47.5107 -122.362   
+          
+                 sqft\_living15  sqft\_lot15  
+          1               1690        7639  
+          10              2210        8925  
+          15              2140        4000  
+          21              4110       20336  
+          22              2240        7005  
+          24              2200        6865  
+          26              1760        3573  
+          29              2630        6026  
+          30              2580        3980  
+          32              1460        5000  
+          34              2020        8720  
+          35              1590        3264  
+          37              1730        4700  
+          39              2620       11884  
+          40              2470        5669  
+          42              3625        5639  
+          45              3050        9232  
+          47              2680       13685  
+          49              2680       72513  
+          51              1990        9133  
+          54              2730        6000  
+          55              1950        5000  
+          56              2250        4500  
+          57              2690        4750  
+          58              2960       11044  
+          60              2570       18900  
+          62              2500        9500  
+          65              1440        4000  
+          66              2750       11049  
+          67              2221        4557  
+          {\ldots}              {\ldots}         {\ldots}  
+          21537           2604        6238  
+          21542           1370        7770  
+          21544           2280        2812  
+          21546           3010        6026  
+          21548           3860      151081  
+          21553           1300       15836  
+          21554           2198        7621  
+          21558           1630        2670  
+          21560           2900        5570  
+          21562           3038        7095  
+          21563           2240        5123  
+          21564           3000        4650  
+          21565           2260        4563  
+          21568           2190       10777  
+          21571           2850        5708  
+          21573           2290        2664  
+          21575           2927        5183  
+          21580           2850        6000  
+          21581           2850        6000  
+          21589           2540        4571  
+          21591           1810        5641  
+          21594           2530        5988  
+          21596           3550        9421  
+          21597           2290       10125  
+          21598           2673        6500  
+          21599           3370        6814  
+          21603           2270        5731  
+          21605           2520        6023  
+          21606           2050        6200  
+          21609           1830        7200  
+          
+          [9118 rows x 21 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{n}{casas}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{n}{sales}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}126}]:} 0.42187572294452413
+\end{Verbatim}
+            
+    \section{3 - Building a regression model with several more
+features}\label{building-a-regression-model-with-several-more-features}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PY{n}{advanced\PYZus{}features} \PY{o}{=} \PY{p}{[}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bedrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}lot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} condition of house}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} measure of quality of construction}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterfront}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} waterfront property}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{view}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} type of view}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}above}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} square feet above ground}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}basement}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} square feet in basement}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yr\PYZus{}built}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} the year built\PYZsq{}yr\PYZus{}renovated\PYZsq{}, \PYZsh{} the year renovated}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{long}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} the lat\PYZhy{}long of the parcel}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living15}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} average sq.ft. of 15 nearest neighbors}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}lot15}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} average lot size of 15 nearest neighbors}
+          \PY{p}{]}
+          
+          \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}data}\PY{p}{[}\PY{n}{advanced\PYZus{}features}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{advanced\PYZus{}features}\PY{p}{)}\PY{p}{)}
+          \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{n}{mult\PYZus{}model} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{mult\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}129}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}130}]:} \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{test\PYZus{}data}\PY{p}{[}\PY{n}{advanced\PYZus{}features}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{advanced\PYZus{}features}\PY{p}{)}\PY{p}{)}
+          \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{test\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{mult\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{intercept:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mult\PYZus{}model}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coefficients:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mult\PYZus{}model}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} The mean squared error}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RMSE: }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{rmse}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+intercept: [ 8355574.94114961] coefficients: [[ -3.89175069e+04   4.65356559e+04   1.14160658e+02   1.55625102e-01
+    5.30062861e+03  -6.06139549e+02   2.21778020e+04   9.38696764e+04
+    6.17740285e+05   5.09808670e+04   6.98475352e+01   4.43131237e+01
+   -2.74816838e+03   6.01490912e+05  -2.22902745e+05   2.14654122e+01
+   -4.20099024e-01]]
+RMSE: 193866.47
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}132}]:} \PY{l+m+mf}{249311.90} \PY{o}{\PYZhy{}} \PY{n}{rmse}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}132}]:} 55445.429793712654
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

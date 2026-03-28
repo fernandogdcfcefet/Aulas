@@ -1,0 +1,76 @@
+function [] = main(op)
+
+    min = 1000;
+    max = 10000;
+    passo = 1000;
+
+    hold on;
+    
+    tam = (max + passo - min)/passo;
+    c1(tam) = 0;
+    c2(tam) = 0;
+    X(tam) = 0;
+    
+    if(op == 1)    
+        indx = 1;
+        for i=min:passo:max
+            vetor(i) = 0;
+            for j=1:i
+                vetor(j) = j;
+            end
+            [c1(indx), v1] = quicksort2(vetor);
+            [c2(indx), v2] = heapsort2(vetor);
+            X(indx) = i;
+            indx = indx+1
+        end
+        valida = v1 == v2;
+        if(sum(valida) == length(valida))
+            disp('Sucesso!')
+        end
+        plot(X,c1,'blue');
+        plot(X,c2,'red');
+    elseif(op == 2)
+        indx = 1;
+        for i=min:passo:max
+            vetor(i) = 0;
+            for j=1:i
+                vetor(j) = i-j;
+            end
+            [c1(indx), v1] = quicksort2(vetor);
+            [c2(indx), v2] = heapsort2(vetor);
+            X(indx) = i;
+            indx = indx+1
+        end
+        valida = v1 == v2;
+        if(sum(valida) == length(valida))
+            disp('Sucesso!')
+        end
+        plot(X,c1,'blue');
+        plot(X,c2,'red');
+        
+    elseif(op == 3)
+        indx = 1;
+        for i=min:passo:max
+            vetor(i) = 0;
+            for j=1:i
+                vetor(j) = randi(i);
+            end
+            tic;
+            [c1(indx), v1] = quicksort2(vetor);
+            toc;
+            tic;
+            [v3, v4] = sort(vetor);
+            toc;
+            [c2(indx), v2] = heapsort2(vetor);
+            X(indx) = i;
+            indx = indx+1
+        end
+        valida = v1 == v2;
+        if(sum(valida) == length(valida))
+            disp('Sucesso!')
+        end
+        plot(X,c1,'blue');
+        plot(X,c2,'red');
+    end
+
+end

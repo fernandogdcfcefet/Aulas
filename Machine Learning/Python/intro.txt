@@ -1,0 +1,21 @@
+sudo apt-get update
+
+sudo apt-get install python3
+
+sudo apt-get install pip
+
+sudo apt-get install python3-venv
+
+python3 -m venv ml_env
+
+source ml_env/bin/activate
+
+pip3 install jupyter notebook ipykernel
+
+pip3 install numpy
+
+pip3 install scikit-learn
+
+pip3 install pandas
+
+python3-m ipykernel install --user --name=ml_env

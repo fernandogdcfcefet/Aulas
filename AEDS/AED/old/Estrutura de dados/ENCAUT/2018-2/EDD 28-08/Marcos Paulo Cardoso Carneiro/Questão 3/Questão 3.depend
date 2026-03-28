@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1535469088 source:c:\users\cefet\desktop\marcos paulo cardoso carneiro\questão 3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+

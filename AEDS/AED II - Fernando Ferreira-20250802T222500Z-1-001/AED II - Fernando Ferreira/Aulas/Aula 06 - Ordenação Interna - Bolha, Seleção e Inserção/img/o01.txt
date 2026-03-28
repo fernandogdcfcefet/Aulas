@@ -1,0 +1,6 @@
+public class Item {
+  private int chave;
+  public Item(int chave) {
+    this.chave = chave;
+    /*outros componentes */
+}

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1493736891 source:e:\prova edd 02-05\numero3\fila.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+

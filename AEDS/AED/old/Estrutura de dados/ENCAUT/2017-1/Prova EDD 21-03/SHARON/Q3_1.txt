@@ -1,0 +1,3 @@
+O codigo mostra quais pessoas moram na mesma rua de outra pessoa. Na linha 23 compara se a rua da pessoa i é a mesma rua da pessoa j 
+e se são a mesma pessoa(na segunda condição).Se a rua for a mesma e as pessoas(nomes) forem diferentes, ele entra na condição e 
+imprime o nome da pessoa que mora na mesma rua da pessoa da linha de numero 20.

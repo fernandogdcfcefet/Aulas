@@ -1,0 +1,91 @@
+/**
+ * @file lista_de.h
+ * @brief Protótipos para a lista duplament encadeada (lista_de).
+ * 
+ * Este arquivo contém os protótipos da estrutura de dados lista
+ * duplamente encadeada (implementada com alocação dinâmica de
+ * memória), além das declarações de tipos para a 'lista' e os
+ * dados a serem armazenados ('item').
+ * 
+ * @author Anderson Grandi Pires (agpires@cefetmg.br)
+ * @bug Nenhum bug conhecido.
+ */
+
+#ifndef LISTA_DUP_ENC
+#define LISTA_DUP_ENC
+
+#include <stdbool.h>
+#include "item.h"
+
+typedef struct celula celula;           // célula ou nó
+
+typedef struct lista lista;
+
+/**
+ * @brief Procura por um item na lista.
+ * @param l uma lista
+ * @param it o item a ser procurado
+ * @return 'true' se o item encontra-se na lista; 'false' caso contrário
+ */
+bool lista_buscar(lista* l, item it);
+
+/**
+ * @brief Cria uma lista vazia
+ * @return a lista criada (ponteiro para a lista) ou NULL em caso de erro
+*/
+lista* lista_criar();
+
+/**
+ * @brief Exibe o conteúdo da lista
+ * @param l uma lista (ponteiro)
+ * @return Não tem
+*/
+void lista_exibir(lista* l);
+
+/**
+ * @brief Insere um item na k-ésima posição da lista
+ * @param l uma lista (ponteiro)
+ * @param k a k-ésima posição onde o item será inserido (k=1 => primeira posição)
+ * @param it item a ser inserido
+ * @return 'true' se inserido com sucesso; 'false' caso contrário
+*/
+bool lista_inserir(lista* l, int k, item it);
+
+
+/**
+ * @brief Libera a memória alocada para a lista
+ * 
+ * Utilize esta função da seguinte forma:
+ * liberar(&l);
+ * onde 'l' é uma lista. Poderia ser 'l1', 'l2', etc.
+ * Com isso, a variável 'l' terá seu valor atualizado para 'NULL' após a
+ * utilização desta função.
+ * 
+ * @param l uma lista (ponteiro)
+*/
+void lista_liberar(lista** l);
+
+/**
+ * @brief Remove o item da k-ésima posição da lista
+ * @param l uma lista (ponteiro)
+ * @param k a posição onde o item se encontra (k=1 => primeira posição)
+ * @param [out] it item removido da lista
+ * @return 'true' se removido com sucesso; 'false' caso contrário
+*/
+bool lista_remover(lista* l,  int k, item *it);
+
+/**
+ * @brief Retorna o tamanho da lista
+ * @param l uma lista (ponteiro)
+ * @return quantidade de itens presentes na lista
+ */
+int lista_tamanho(lista* l);
+
+/**
+ * @brief Informa se a lista está vazia
+ * @param l uma lista (ponteiro)
+ * @return 'true' se estiver vazia; 'false' caso contrário
+ */
+bool lista_vazia(lista* l);
+
+#endif  // LISTA_DUP_ENC

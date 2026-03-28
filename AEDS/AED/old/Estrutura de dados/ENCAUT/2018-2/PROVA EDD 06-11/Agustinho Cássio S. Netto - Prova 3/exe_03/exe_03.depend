@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1541515250 source:e:\agustinho cássio s. netto - prova 3\exe_03\main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+

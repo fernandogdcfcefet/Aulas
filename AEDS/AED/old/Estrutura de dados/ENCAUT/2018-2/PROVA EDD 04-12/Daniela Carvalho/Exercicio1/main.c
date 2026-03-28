@@ -1,0 +1,150 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef  long  TipoChave;
+
+typedef  struct  TipoRegistro
+{
+    TipoChave Chave;
+    /*  outros  componentes  */
+}  TipoRegistro;
+typedef  struct  TipoNo  *  TipoApontador;
+
+typedef  struct  TipoNo
+{
+    TipoRegistro  Reg;
+    TipoApontador  Esq,	Dir ;
+}  TipoNo;
+
+void  Inicializa (TipoApontador *Dicionario)
+{
+    * Dicionario  =  NULL ;
+}
+
+void  Insere( TipoRegistro  x,  TipoApontador *p)
+{
+    if  ( *p == NULL)
+    {
+        *p  =  (TipoApontador)malloc( sizeof (TipoNo) ) ;
+        (*p)->Reg =  x;
+        ( *p)->Esq =  NULL;
+        ( *p)->Dir  =  NULL;
+        return ;
+    }
+    if	( x.Chave <  (*p)->Reg.Chave)
+    {
+        Insere(x, &(*p)->Esq) ;
+        return ;
+    }
+    if	( x.Chave >  (*p)->Reg.Chave)
+        Insere(x, &(*p)->Dir ) ;
+    else
+        printf ( "Erro	:	Registro  ja	existe  na  arvore\n" ) ;
+}
+
+void  Pesquisa( TipoRegistro  *x,  TipoApontador *p)
+{
+    if  ( *p == NULL)
+    {
+        printf ( "Erro :	Registro  nao  esta  presente  na  arvore\n" ) ;
+        return ;
+    }
+    if	( x->Chave <  (*p)->Reg.Chave)
+    {
+        Pesquisa(x, &(*p)->Esq) ;
+        return ;
+    }
+    if	( x->Chave >  (*p)->Reg.Chave)
+        Pesquisa(x, &(*p)->Dir ) ;
+    else  *x  =  (*p)->Reg;
+}
+
+void  Antecessor(TipoApontador  q,  TipoApontador * r )
+{
+    if	(( * r)->Dir  !=  NULL)
+    {
+        Antecessor(q, &(* r)->Dir ) ;
+        return ;
+    }
+    q->Reg =  (*r)->Reg;
+    q = * r ;
+    *r  =  (*r)->Esq;
+    free (q);
+}
+void Retira(TipoRegistro x, TipoApontador *p)
+{
+    TipoApontador Aux;
+    if (*p == NULL )
+    {
+        printf ( "Erro : Registro nao esta na arvore\n" ) ;
+        return;
+    }
+    if (x.Chave < (*p)->Reg.Chave)
+    {
+        Retira(x, &(*p)->Esq) ;
+        return;
+    }
+    if (x.Chave > (*p)->Reg.Chave)
+    {
+        Retira(x, &(*p)->Dir ) ;
+        return;
+    }
+    if ( (*p)->Dir == NULL)
+    {
+        Aux = *p;
+        *p = (*p)->Esq;
+        free(Aux) ;
+        return;
+    }
+    if ( (*p)->Esq != NULL )
+    {
+        Antecessor(*p, &(*p)->Esq) ;
+        return;
+    }
+    Aux = *p;
+    *p = (*p)->Dir ;
+    free(Aux) ;
+}
+
+void Central (TipoApontador p)
+{
+    if (p == NULL)
+        return;
+    Central (p->Esq) ;
+    printf ( "%ld \n", p->Reg.Chave) ;
+    Central (p->Dir ) ;
+}
+
+//Funcao para comparar duas arvores
+void Compara(TipoApontador p)
+{
+    TipoApontador aux;
+
+}
+
+int main()
+{
+    TipoApontador raiz; TipoRegistro x;
+    Inicializa(&raiz);
+    x.Chave = 20;
+    Insere(x,&raiz);
+    x.Chave = 15;
+    Insere(x,&raiz);
+    x.Chave = 13;
+    Insere(x,&raiz);
+    x.Chave = 22;
+    Insere(x,&raiz);
+    x.Chave = 10;
+    Insere(x,&raiz);
+    x.Chave = 9;
+    Insere(x,&raiz);
+    x.Chave = 18;
+    Insere(x,&raiz);
+
+    Central(raiz);
+
+    printf("\n\n");
+    Central(raiz);
+
+    return 0;
+}

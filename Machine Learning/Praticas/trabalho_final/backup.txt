@@ -1,0 +1,218 @@
+\documentclass{article} % For LaTeX2e
+\usepackage{nips15submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{subfig}
+
+%\documentstyle[nips14submit_09,times,art10]{article} % For LaTeX 2.09
+
+
+\title{Predição de Download de Aplicativo}
+
+
+\author{
+Fernando Garcia Diniz Campos Ferreira \\
+Departamento de Computação\\
+Centro Federal de Educação Tecnológica de Minas Gerais\\
+Belo Horizonte, Minas Gerais \\
+\texttt{fernandogdcf@gmail.com} \\
+\And
+Vítor de Sousa Moreira\\
+Departamento de Computação\\
+Centro Federal de Educação Tecnológica de Minas Gerais\\
+Belo Horizonte, Minas Gerais \\
+\texttt{vitorsm96@gmail.com} \\
+}
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to \LaTeX{} to determine where to break
+% the lines. Using \AND forces a linebreak at that point. So, if \LaTeX{}
+% puts 3 of 4 authors names on the first line, and the last on the second
+% line, try using \AND instead of \And before the third author name.
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\nipsfinalcopy % Uncomment for camera-ready version
+
+\begin{document}
+
+%\renewcommand\tablename{Quadro}
+
+\maketitle
+
+\begin{abstract}
+Propaganda online, atualmente, é uma forma de comunicação que pode atingir milhões de usuários em um curto intervalo de tempo, o que gera um elevado custo para as companhias que vendem produtos online, como aplicativos para \textit{mobile phone}. Esse elevado custo pode ser minimizado se a propaganda for realizada de forma mais direcionada, atingindo um público menor, mas que tenha maior chances de adquirir o produto anunciado. Considerando o problema de predição de download de aplicativos, quatro métodos de classificação serão comparados: Regressão Logística, Redes Neurais Artificiais, Árvore de Decisão e \textit{Support Vector Macinhe}. Os métodos serão, ainda, comparados com dois \textit{baselines}: o primeiro, majoritário, classifica todas as entradas como pertencentes à classe mais frequente no \textit{dataset}, enquanto que o segundo, aleatório, prevê cada entrada como sendo da classe 0 ou 1 com uma mesma probabilidade. Para isso, são utilizadas três métricas: acurácia, precisão e revocação. Resultados parciais indicam que, para uma base de dados balanceada, o primeiro \textit{baseline} apresenta maior desempenho, enquanto que o segundo \textit{baseline} possui desempenho muito melhor quando a base de dados é muito desbalanceada, com poucos elementos da classe 1. 
+\end{abstract}
+
+\section{Introdução}
+
+Para companhias que fazem propaganda online, a quantidade de visualizações dessas propagandas sem que o usuário adquira o produto é muito alta, o que gera elevados custos aos canais de publicidade online. A China, por exemplo, em que existem bilhões de usuários de \textit{smart phone} ativos todo mês, sofre muito com esse problema. 
+
+O trabalho trata, especificamente, desse problema de propaganda para download de aplicativos. Nesse caso, deseja-se saber, a partir de dados quantitativos e qualitativos sobre a propaganda e o aparelho utilizado pelo usuário ao visualizar a propaganda, como o canal da publicidade, o endereço IP e o tipo do aparelho, se o usuário irá baixar a propaganda. 
+
+A previsão de usuários que irão baixar um aplicativo após a visualização da propaganda pode auxiliar em uma publicidade mais direcionada, minimizando os gastos com propaganda, sem que haja uma redução no número de downloads para o aplicativo.
+
+Devido à falta de trabalhos na literatura para esse problema específico, pode-se relacioná-lo ao problema de detecção de fraudes para cartão de crédito, que possui características em comum, como \textit{datasets} desbalanceados, e em que a revocação é muito importante. Assim, para solucionar esse problema, são propostos métodos de aprendizado de máquina para o desenvolvimento de modelos de classificação de transações com cartão de crédito para detecção de fraude baseados em alguns trabalhos da literatura.
+
+O trabalho de [1] utiliza os métodos de classificação RF (Random Forest), rede neural, SVM (\textit{Support Vector Machine}) e árvore de decisão para detecção de fraude em cartão de crédito. Porém, várias técnicas de balanceamento dos dados são realizadas antes da aplicação desses métodos, já que normalmente as bases de dados para detecção de fraude possuem muitos valores pertencentes a classe de não fraude em relação às instâncias que correspondem a fraudes. Várias bases de dados foram utilizadas e os resultados mostraram que a acurácia de cada método está muito ligada aos dados de treinamento, sendo que não foi observada a superioridade estatística de um dos métodos em relação aos demais. Para o trabalho proposto, esse tratamento de dados para balanceá-lo, que se mostrou muito eficiente no trabalho mencionado, não será necessário já que a base de dados escolhida já está balanceada, apesar de instâncias da classe fraude ainda ser a minoria.
+
+Também são utilizados métodos de classificação para detecção de fraudes de cartão de crédito em [2], sendo que algumas características utilizadas são obtidas por meio de data mining, processo que se mostrou muito eficaz para esse tipo de problema. Os métodos de classificação utilizados foram rede neural, regressão logística e árvore de decisão. Pode-se observar pelos resultados que, para o problema específico estudado nesse artigo, rede neural e regressão logística foram superiores à árvore de decisão. 
+
+Já em [3], a classificação é realizada a partir de uma cadeia de transações em que não se sabe, a priori, se são fraude ou não. Para categorizá-las em fraude ou transação legal, um algoritmo de clustering, K-Means é executado, dividindo os dados em dois conjuntos. Algoritmo genético combinado com KNN (K-Nearest-Neighbour) é utilizado para decidir sobre o melhor subconjunto de características a ser utilizado pelo classificador e, por fim, o SVM é utilizado para treinamento de um modelo de classificação. Apesar da diminuição de características ser um procedimento interessante a ser testado no trabalho proposto, sua implementação complexa poderia tornar tal experimento inviável, de forma que esse teste será deixado para trabalhos futuros.
+
+O objetivo deste trabalho, então, é implementar e comparar diferentes metodologias para classificação de usuários na predição de download de aplicativos. Os métodos a ser comparados serão: regressão logística, árvore de decisão, SVM e redes neurais artificiais, que serão avaliados em relação às métricas de desempenho: acurácia, precisão e revocação e, além de comparados entre si, serão comparados com \textit{baselines}.  
+
+\section{Metodologia}
+\label{metodologia}
+
+Os dados utilizados foram tirados de uma competição \textit{kaggle} e está disponível no endereço: \textit{https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection/data}. A base de dados é composta de 184903850 entradas, sendo que cada uma corresponde a um clique em uma propaganda de aplicativo para \textit{mobile phones}. Cada entrada possui 6 atributos, sendo eles: o endereço IP do usuário que realizou o clique, o identificador (ID) do aplicativo referente à propaganda clicada, o tipo do aparelho em que o usuário realizou o clique, a versão do seu sistema operacional, o canal da editora da propaganda e o tempo do clique (data e hora). Além disso, é informado, para cada entrada, se o aplicativo foi baixado ou não. 
+
+A partir dessa base de dados com 184903850 entradas, considerando que cerca de 4000000 de instâncias seriam necessárias, e sabendo que os dados eram ordenados de acordo com o tempo do clique, um novo arquivo foi construído com 4019649 entradas igualmente espaçadas do arquivo original utilizando o seguinte comando no Linux: "awk 'NR\%46==0 || NR==1' arquivo.csv>> novoArquivo.csv", que copia, além do cabeçalho, linhas múltiplas de 46 do arquivo original para o novo. Nessa nova base de dados, 9777 entradas (0,243\% do total) são de cliques que resultaram em um download, ou seja, pertencem à classe 1, enquanto que os restantes são ditos pertencerem à classe 0.
+
+Duas novas bases de dados foram criadas a partir dessa base de dados menor. A primeira (chamada de Base de Dados 1) representa um conjunto de dados balanceado, ou seja, metade dos dados são da classe 0 e a outra metade, da classe 1. Para isso, todos os elementos da classe 1 são selecionados para tal base e a outra metade é formada por elementos selecionados aleatoriamente da classe 0. A segunda (chamada de Base de Dados 2), possui a mesma quantidade de elementos da primeira, mas a proporção de entradas de cada classe é próxima da proporção apresentada pela base de dados que a originou. Para isso, todas as suas entradas são selecionadas de forma aleatória, sem repetição.
+
+Os atributos endereço IP, ID do aplicativo, tipo do aparelho, versão do sistema operacional e canal da editora são codificados utilizando \textit{1-hot encoding}, ou seja, cada um desses atributos são transformados em n novos atributos, onde n é a quantidade de valores únicos de todas as entradas para aquele atributo. Cada entrada terá valor 1 para o novo atributo correspondente a seu valor e valor 0 para os demais. Essa codificação é feita para as duas bases de dados. Já o tempo do clique foi transformado em uma característica quantitativa que mede horas após o primeiro clique ocorrido na base de dados original.
+
+Dois procedimentos básicos são utilizados para analisar o desempenho dos métodos de classificação que serão utilizados. Espera-se que os métodos de aprendizado de máquina apresentem desempenho superior a esses dois procedimentos ou \textit{baselines}. Nesse primeiro teste, em que há apenas resultados referentes aos \textit{baselines}, as bases de dados 1 e 2 são inteiramente utilizadas para o teste. As métricas avaliadas, para os dois \textit{baselines}, são acurácia, precisão e revocação. O primeiro \textit{baseline}, por ser determinístico, é executado uma única vez, enquanto que o segundo, por ser estocástico, é executado 30 vezes para cada base de dados.
+
+
+\subsection{\textit{Baseline} 1}
+
+O primeiro \textit{baseline} prevê todas as soluções como pertencente à classe mais frequente na base de dados analisada. Dessa forma, se houver mais entradas da classe 0 que elementos da classe 1, todas as entradas no teste serão preditas como sendo da classe 0. Caso contrário, todas as entradas são preditas como sendo da classe 1. Dessa forma, esse procedimento garante uma acurácia de, pelo menos, 0,5.
+
+\subsection{\textit{Baseline} 2}
+
+O segundo \textit{baseline} realiza uma previsão aleatória, ou seja, cada entrada no teste terá chances iguais de serem previstas como sendo da classe 0 ou 1. Assim, para base de dados grandes, esse procedimento tende a ter uma acurácia próxima a 0,5, independente da distribuição de frequência das classes. 
+
+
+\section{Resultados}
+\label{resultados}
+
+A análise dos \textit{baselines} utiliza toda a base de dados para teste, já que os \textit{baselines} são procedimentos simples que não requer treinamento ou validação para ajuste de parâmetros. Para cada base de dados, os dois \textit{baselines} são executados e suas métricas são comparadas. Quando necessário, testes de hipóteses são realizados para a comparação dos métodos.
+
+
+\subsection{Base de Dados 1}
+
+Na primeira base de dados, em que as classes são balanceadas, as matrizes de confusão mostram que, para o \textit{baseline} 1 (referente à Tabela \ref{b1ca}), metade das previsões são corretas e metades são incorretas, como esperado, já que os dados estão balanceados e o método prevê todas as entradas como a classe de maior frequência (nesse caso as duas classes possuem mesma quantidade de entradas). Utilizando o \textit{baseline} 2 (como mostrado na Tabela \ref{b1cb}), por outro lado, para cada classe, percebe-se previsões da classe 0 e da classe 1 com frequências parecidas (quase metade de previsões feitas para cada classe), como esperado também, pois o método é aleatório. Assim, para base de dados muito grandes, espera-se que o método acerte metade das vezes para cada classe real. 
+
+\begin{table}[!hbt]
+\centering
+\caption{Matriz de Confusão para Primeira Base de Dados}
+\label{b1c}
+ \subfloat[\textit{Baseline} 1]{
+ \label{b1ca}
+ \centering
+ \begin{tabular}{l|c|c|}
+ 
+\cline{2-3}
+n=19554                                 & \multicolumn{1}{l|}{\textbf{Predito: 0}} & \multicolumn{1}{l|}{\textbf{Predito: 1}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Real: 0}} & 0                                        & 9777                                     \\ \hline
+\multicolumn{1}{|l|}{\textbf{Real: 1}} & 0                                        & 9777                                     \\ \hline
+\end{tabular}}
+ \hspace{1cm} %altera o espaçamento entre as tabelas
+ \subfloat[\textit{Baseline} 2]{
+ \label{b1cb}
+ \centering
+ \begin{tabular}{l|c|c|}
+\cline{2-3}
+n=19554                                & \multicolumn{1}{l|}{\textbf{Predito: 0}} & \multicolumn{1}{l|}{\textbf{Predito: 1}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Real: 0}} & 4961                                     & 4816                                     \\ \hline
+\multicolumn{1}{|l|}{\textbf{Real: 1}} & 4867                                     & 4910                                     \\ \hline
+\end{tabular}}
+\end{table}
+
+%\renewcommand\tablename{Tabela}
+
+
+Para uma melhor comparação dos dois procedimentos para essa base de dados, as métricas de desempenho para cada uma são apresentadas na Tabela \ref{b1m}. Tanto para acurácia quanto para precisão, os valores apresentados pelos dois procedimentos são muito próximos, mas para revocação pode-se perceber que o \textit{baseline} 1 apresenta o melhor valor possível, claramente superando o outro procedimento nessa métrica. Após 30 execuções do \textit{baseline} 2 para essa base de dados, testes de hipóteses foram realizados para acurácia e precisão e, supondo que essas métricas possuem distribuição normal e considerando um nível de significância de 5\%, as hipóteses de que tais métricas apresentadas pelo \textit{baseline} 1, em média, são diferentes de 0,5, foram rejeitadas. Assim, apenas a revocação pode ser considerada diferente nos dois procedimentos e, portanto, pode-se afirmar que o \textit{baseline} 1 é melhor para essa base de dados. 
+
+\begin{table}[!hbt]
+\centering
+\caption{Métricas para Primeira Base de Dados}
+\label{b1m}
+\begin{tabular}{lcc}
+\hline
+\textbf{Métrica}   & \multicolumn{1}{l}{\textbf{Baseline 1}} & \multicolumn{1}{l}{\textbf{Baseline 2}} \\ \hline
+\textbf{Acurácia}  & 0,5                                     & 0,5048                                  \\
+\textbf{Precisão}  & 0,5                                     & 0,5048                                  \\
+\textbf{Revocação} & 1                                       & 0,5022                                  \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Base de Dados 2}
+
+A segunda base de dados possui a mesma proporção de elementos de cada classe que a base de dados original possui, ou seja, poucas entradas são da classe 1. Assim, pode-se observar que o \textit{baseline} 1, que sempre prevê a classe 0 neste caso, possui um número muito alto de acertos e um erro pequeno, como mosta a Tabela \ref{b2ca}. Porém, nenhum acerto ocorre para a classe de interesse (classe 1). Dessa forma, o \textit{baseline}  2, mostrado na Tabela \ref{b2cb}, pode ser mais interessante para o problema a ser tratado, já que ele consegue prever corretamente algumas entradas da classe 1, mesmo que o número de acertos seja baixo e o número de erros seja muito maior que no \textit{baseline} 1.
+
+\begin{table}[!hbt]
+\centering
+\caption{Matriz de Confusão para Segunda Base de Dados}
+\label{b2c}
+ \subfloat[\textit{Baseline} 1]{
+ \label{b2ca}
+ \centering
+ \begin{tabular}{l|c|c|}
+\cline{2-3}
+n=19554                                & \multicolumn{1}{l|}{\textbf{Predito: 0}} & \multicolumn{1}{l|}{\textbf{Predito: 1}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Real: 0}} & 19503                                    & 0                                        \\ \hline
+\multicolumn{1}{|l|}{\textbf{Real: 1}} & 51                                       & 0                                        \\ \hline
+\end{tabular}}
+ \hspace{1cm} %altera o espaçamento entre as tabelas
+ \subfloat[\textit{Baseline} 2]{
+ \label{b2cb}
+ \centering
+ \begin{tabular}{l|c|c|}
+\cline{2-3}
+n=19554                                & \multicolumn{1}{l|}{\textbf{Predito: 0}} & \multicolumn{1}{l|}{\textbf{Predito: 1}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Real: 0}} & 9723                                     & 9780                                     \\ \hline
+\multicolumn{1}{|l|}{\textbf{Real: 1}} & 26                                       & 25                                       \\ \hline
+\end{tabular}}
+\end{table}
+
+As métricas de cada procedimento são apresentadas na Tabela \ref{b2m}, que mostra a elevada taxa de acerto do \textit{baseline} 1, como já foi dito, e ainda assim, seu baixo desempenho, com precisão e revocação iguais a 0. A superioridade do \textit{baseline} 2, para essa base de dados, é clara, já que sua precisão e revocação são diferentes de 0, ainda que a precisão seja muito baixa, como resultado do pequeno número de entradas da classe 1. Nesse caso, a grande diferença de valores das métricas para cada procedimento faz com que não seja necessário o uso de testes de hipóteses.   
+
+\begin{table}[!hbt]
+\centering
+\caption{Métricas para Primeira Base de Dados}
+\label{b2m}
+\begin{tabular}{lcc}
+\hline
+\textbf{Métrica}   & \multicolumn{1}{l}{\textbf{Baseline 1}} & \multicolumn{1}{l}{\textbf{Baseline 2}} \\ \hline
+\textbf{Acurácia}  & 0,9974                                  & 0,4985                                  \\
+\textbf{Precisão}  & 0                                       & 0,0025                                  \\
+\textbf{Revocação} & 0                                       & 0,4902                                  \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Conclusão}
+
+Dois métodos \textit{baselines} foram aplicados a duas diferentes base de dados e o desempenho desses métodos foram avaliados em relação às métricas acurácia, precisão e revocação. Para a primeira base de dados, cujas classes são balanceadas, percebe-se uma superioridade do \textit{baseline} 1 em relação ao 2, para a métrica revocação. Já para a segunda base de dados, desbalanceada, o \textit{baseline} 2 apresenta métricas de desempenho muito melhores que o \textit{baseline} 1. 
+
+Dessa forma, pode-se presumir que o \textit{baseline} 1, majoritário, apresenta um bom desempenho quando existem muitas entradas da classe 1, pois, nesse caso, a precisão aumenta enquanto que a revocação assume o melhor valor possível. Quando há poucas entradas da classe 1, como acontece com a base de dados 2, o \textit{baseline} 1 nunca prevê elementos da classe 1, que é a classe de interesse.
+
+Já o \textit{baseline} 2, como pode ser observado nos resultados, apresenta sempre acurácia e revocação próximos de 0,5, quando existe uma base de dados com muitos elementos (nesse caso, 19554). A precisão, para esse método, é proporcional à fração de elementos da classe 1.
+
+Dessa forma, para esse tipo de problema, em que a quantidade de elementos da classe 1 é muito pequena, o \textit{baseline} 2 não pode ser utilizado como método de comparação, por não prever nenhum elemento da classe de interesse. Assim, será considerado apenas o \textit{baseline} 1, que deve ser superado pelos métodos de aprendizado de máquina que serão implementados para a solução desse problema apresentado. 
+
+
+\subsection*{References}
+
+
+\small{
+
+[1] Dal Pozzolo, Andrea. \textit{Adaptive Machine Learning for Credit Card Fraud Detection}. (2015). Thesis (Ph.D. degree in Computer Science) - Computer Science Department, Université Libre de Bruxelles, Brussels.
+
+[2] Shen, Aihua \& Tong, Rencheng \& Deng, Yaochen. (2007). Application of Classification Models on Credit Card Fraud Detection. \textit{International Conference on Service Systems and Service Management}. 1 - 4. 10.1109/ICSSSM.2007.4280163.
+
+[3] Sinha, Akshansh \& Mokha, Shivam. (2017). Classification and Fraud Detection in Finance Industry. \textit{International Journal of Computer Applications}. v. 176, n. 3.
+
+}
+
+\end{document}
+

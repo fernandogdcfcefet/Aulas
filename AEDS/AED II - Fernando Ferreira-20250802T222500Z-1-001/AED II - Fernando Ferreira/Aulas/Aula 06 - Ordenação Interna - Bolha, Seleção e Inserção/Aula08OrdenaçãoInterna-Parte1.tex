@@ -1,0 +1,716 @@
+\documentclass[compress,blue,xcolor={table,dvipsnames}]{beamer}
+\mode<presentation>
+\usetheme{Warsaw}
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{epsfig}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{booktabs}
+
+\useoutertheme[subsection=false]{smoothbars}
+
+\usepackage{color}
+\lstdefinestyle{customc}{
+	belowcaptionskip=1\baselineskip,
+	breaklines=true,
+	frame=L,
+	xleftmargin=\parindent,
+	language=java,
+	showstringspaces=false,
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+	numbers=left,
+}
+\lstset{escapechar=@,style=customc}
+%=================================================
+\newcommand{\be}{\begin{enumerate}}
+	\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bq}{\begin{quote}}
+	\newcommand{\eq}{\end{quote}}
+\newcommand{\bd}{\begin{description}}
+	\newcommand{\ed}{\end{description}}
+\newcommand{\bi}{\begin{itemize}}
+	\newcommand{\ei}{\end{itemize}}
+\newcommand{\bc}{\begin{columns}[c]}
+	\newcommand{\ic}{\column{2in}}
+	\newcommand{\ec}{\end{columns}}	
+\newcommand{\bp}{\begin{block}{} \begin{lstlisting}}
+		\newcommand{\ep}{\end{lstlisting} \end{block}}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+%=================================================
+\lstset{language=Java,
+	basicstyle=\scriptsize,
+	commentstyle=\color{red},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny}
+%=================================================
+\date[]{}
+
+\institute[DCC / PUC Minas]
+{\epsfig{file=img/Brasao_PUC_Minas.png,scale=0.1} \\
+	\textsc{Pontifícia Universidade Católica de Minas Gerais}\\
+	Instituto de Ciências Exatas e Informática
+}
+
+\title{Algoritmos e Estrutura de Dados II}
+
+\author[Prof. Henrique Batista da Silva]
+{
+	Ordenação Interna - Bolha, Seleção e Inserção
+}
+%===================================================================================================
+\begin{document}
+% Creates title page of slide show using above information
+\begin{frame}
+  \titlepage
+\end{frame}
+%===================================================================================================
+%\section[Agenda]{}
+% Creates table of contents slide incorporating
+% all \section and \subsection commands
+%\begin{frame}
+%\frametitle{Agenda}
+%\tableofcontents
+%\end{frame}
+%===================================================================================================
+\section{Ordenação Interna}
+\begin{frame}
+\frametitle{Introdução - Conceitos Básicos}
+\begin{itemize}
+\item Ordenar: processo de \textbf{rearranjar} um conjunto de objetos em uma
+ordem ascendente ou descendente.
+\item A ordenação visa facilitar a \textbf{recuperação} posterior de itens do conjunto
+ordenado.
+\begin{itemize}
+\item Dificuldade de se utilizar um catálogo telefônico se os nomes das
+pessoas não estivessem listados em ordem alfabética.
+\end{itemize}
+\item Notação utilizada nos algoritmos:
+\begin{itemize}
+\item Os algoritmos trabalham sobre os \textbf{registros} de um arquivo.
+\item Cada registro possui uma \textbf{chave} utilizada para controlar a
+ordenação.
+\item Podem existir \textbf{outros componentes} em um registro
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Introdução - Conceitos Básicos} \footnotesize
+\begin{block}{Estrutura de um registro}
+\lstinputlisting[language=java, style=customc]{img/o01.txt}
+\end{block}
+\begin{itemize}
+\item Qualquer tipo de chave sobre o qual exista uma \textbf{regra de ordenação
+bem-definida} pode ser utilizado.
+\item Um método de ordenação é \textbf{estável} se a ordem relativa dos itens com
+chaves iguais não se altera durante a ordenação.
+\item Alguns dos métodos de ordenação mais eficientes não são estáveis.
+\item A estabilidade pode ser forçada quando o método é não-estável.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Introdução - Conceitos Básicos}
+\begin{itemize}
+\item Vetor Não Ordenado:
+\begin{table}
+    \begin{tabular}{llllllllll}
+    [ & 1 & \textcolor{blue}{2} & 3 & 9 & 5 & 4 & \textcolor{green}{2} & \textcolor{red}{2} & ] \\
+    \end{tabular}
+\end{table}
+
+\item Vetor Ordenado (Estável):
+\begin{table}
+    \begin{tabular}{llllllllll}
+    [ & 1 & \textcolor{blue}{2} & \textcolor{green}{2} & \textcolor{red}{2} & 3 & 4 & 5 & 9 & ] \\
+    \end{tabular}
+\end{table}
+
+\item Vetor Ordenado (Não Estável):
+\begin{table}
+    \begin{tabular}{llllllllll}
+    [ & 1 & \textcolor{green}{2} & \textcolor{blue}{2} & \textcolor{red}{2} & 3 & 4 & 5 & 9 & ] \\
+    \end{tabular}
+\end{table}
+
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Introdução - Conceitos Básicos}
+\begin{itemize}
+\item Classificação dos métodos de ordenação:
+\begin{itemize}
+\item Interna: arquivo a ser ordenado cabe todo na memória principal.
+\item Externa: arquivo a ser ordenado não cabe na memória principal.
+\end{itemize}
+\item Diferenças entre os métodos:
+\begin{itemize}
+\item Em um método de ordenação interna, qualquer registro pode ser
+imediatamente acessado.
+\item Em um método de ordenação externa, os registros são acessados
+sequencialmente ou em grandes blocos.
+\end{itemize}
+\item A maioria dos métodos de ordenação é baseada em \textbf{comparações}
+das chaves.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordenação Interna}
+\begin{itemize}
+\item  Na escolha de um algoritmo de ordenação interna deve ser
+considerado o tempo gasto pela ordenação.
+\item  Sendo $n$ o número registros no arquivo, as medidas de complexidade
+relevantes são:
+\begin{itemize}
+\item Número de comparações $C(n)$ entre chaves.
+\item Número de movimentações $M(n)$ de itens do arquivo.
+\end{itemize}
+\item O uso econômico da memória disponível é um requisito primordial na
+ordenação interna.
+\item Métodos de ordenação que utilizam a estrutura de um vetor e executam a permutação dos itens no próprio vetor são os preferidos.
+\item Métodos que utilizam listas encadeadas não são muito utilizados.
+\item Métodos que fazem cópias dos itens a serem ordenados possuem
+menor importância
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Classificação dos métodos de ordenação interna}
+\begin{itemize}
+\item Métodos simples:
+\begin{itemize}
+\item Adequados para pequenos arquivos.
+\item Requerem $(n^2)$ comparações (onde $n$ é a quantidade de elementos).
+\item Produzem programas pequenos.
+\end{itemize}
+\item Métodos eficientes:
+\begin{itemize}
+\item Adequados para arquivos maiores.
+\item Requerem $(n \times log~n)$ comparações.
+\item Usam menos comparações.
+\item As comparações são mais complexas nos detalhes.
+\item Métodos simples são mais eficientes para pequenos arquivos.
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Ordenação Interna}
+\begin{itemize}
+\item Tipos de dados e variáveis utilizados nos algoritmos de ordenação
+interna
+\item O índice do vetor vai de $0$ até $MaxTam$, devido às chaves sentinelas
+\item O vetor a ser ordenado contém chaves nas posições de $1$ até $n$
+\end{itemize}
+\end{frame}
+
+%===================================================================================================
+
+\section{Ordenação Bolha}
+
+\begin{frame}
+\frametitle{Ordenação Bolha - \textit{Bubble Sort}}
+\begin{itemize}
+\item O algoritmo de ordenação bolha é simples de entendimento e de fácil implementação. 
+\item Está entre os mais conhecidos e difundidos métodos de ordenação de arranjos, mas não é um algoritmo eficiente.
+\item O princípio do bolha é a troca de valores entre posições consecutivas, fazendo com que os valores mais altos (ou mais baixos) "borbulhem" para o final do arranjo (por isso o nome \textit{Bubblesort}). 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ordenação Bolha - \textit{Bubble Sort}}
+\begin{itemize}
+\item A ideia é comparar dois elementos e trocá-los de posição, até que os elementos de maior valor sejam levados para o final do vetor.
+\item O processo continua até a ordenação total do vetor lembrando a forma como as bolhas em um tanque de água procuram seu próprio nível.
+\item O tempo (custo) computacional desse algoritmo é de ordem quadrática $(n^2)$
+\item Tempo computacional: não se refere ao tempo de relógio e sim ao número de operações (comparações ou trocas) realizadas pelo algoritmo no processo de ordenação em função da quantidade $n$ de itens de entrada. 
+\item Ele não é recomendado para programas que precisem de velocidade e operem com quantidade elevada de dados. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ordenação Bolha - \textit{Bubble Sort}}
+
+i = 1
+
+\begin{table}
+    \begin{tabular}{l|lllllll}
+    j  & ~ & 1 & 2 & 3 & 4 & 5 & ~ \\ \hline
+    1 &$[$ & \underline{3} & \underline{1} & 5 & 4 & 2 & $]$ \\ \pause
+    2 &$[$ & 1 & \underline{3} & \underline{5} & 4 & 2 & $]$ \\ \pause
+    3 &$[$ & 1 & 3 & \underline{5} & \underline{4} & 2 & $]$ \\ \pause
+    4 &$[$ & 1 & 3 & 4 & \underline{5} & \underline{2} & $]$ \\ \hline \pause 
+    ~ &$[$ & \textbf{1} & \textbf{3} & \textbf{4} & \textbf{2} & \textbf{5} & $]$ \\
+    \end{tabular}
+\end{table}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Ordenação Bolha - \textit{Bubble Sort}}
+i = 2
+\begin{table}
+    \begin{tabular}{l|lllllll}
+    j &~ & 1 & 2 & 3 & 4 & 5 & ~ \\ \hline
+    1 &$[$ & \underline{1} & \underline{3} & 4 & 2 & \textbf{5} & $]$ \\ \pause
+    2 &$[$ & 1 & \underline{3} & \underline{4} & 2 & \textbf{5} & $]$ \\ \pause
+    3 &$[$ & 1 & 3 & \underline{4} & \underline{2} & \textbf{5} & $]$ \\ \hline \pause
+   ~ &$[$ & \textbf{1} & \textbf{3} & \textbf{2} & \textbf{4} & \textbf{5} & $]$ \\
+    \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordenação Bolha - \textit{Bubble Sort}}
+i = 3
+\begin{table}
+    \begin{tabular}{l|lllllll}
+    j &~ & 1 & 2 & 3 & 4 & 5 & ~ \\ \hline
+    1 &$[$ & \underline{1} & \underline{3} & 2 & \textbf{4} & \textbf{5} & $]$ \\ \pause
+    2 &$[$ & 1 & \underline{3} & \underline{2} & \textbf{4} & \textbf{5} & $]$ \\ \hline \pause
+    ~ &$[$ & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & $]$ \\
+    \end{tabular}
+\end{table}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Ordenação Bolha - \textit{Bubble Sort}}
+i = 4
+\begin{table}
+    \begin{tabular}{l|lllllll}
+    j &~ & 1 & 2 & 3 & 4 & 5 & ~ \\ \hline
+    1 &$[$ & \underline{1} & \underline{2} & \textbf{3} & \textbf{4} & \textbf{5} & $]$ \\ \hline \pause
+    ~ &$[$ & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & $]$ \\
+    \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordenação Bolha - \textit{Bubble Sort}}
+\begin{block}{Algoritmo em Java}
+\lstinputlisting[language=java, style=customc]{img/bolha.txt}
+\end{block}
+\end{frame}
+
+
+%==================================================================================================
+
+
+%===================================================================================================
+
+
+
+\begin{frame}
+\frametitle{Ordenação Bolha - \textit{Bubble Sort} - Análise de Complexidade}
+
+\begin{itemize}
+\item Número de Comparações
+\begin{itemize}
+\item Melhor Caso: $n^2$
+\item Pior Caso: $n^2$
+\end{itemize}
+\item Número Movimentações
+\begin{itemize}
+\item Melhor Caso: $1$
+\item Pior Caso: $n^2$
+\end{itemize}
+
+
+\item Vantagens
+\begin{itemize}
+\item Algoritmo simples
+\item Algoritmo estável
+\end{itemize}
+
+
+\item Desvantagens
+\begin{itemize}
+\item O fato de o arquivo já estar ordenado não ajuda em nada, pois o custo continua quadrático
+\end{itemize}
+
+
+\item É possível fazer alguma melhoria???
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordenação Bolha - \textit{Bubble Sort}}
+\begin{block}{}
+\lstinputlisting[language=java, style=customc]{img/bolha2.txt}
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordenação Bolha - \textit{Bubble Sort} - Análise de Complexidade}
+
+\begin{itemize}
+\item Número de Comparações
+\begin{itemize}
+\item Melhor Caso: $n$
+\item Pior Caso: $n^2$
+\end{itemize}
+\item Número Movimentações
+\begin{itemize}
+\item Melhor Caso: $1$
+\item Pior Caso: $n^2$
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+
+%===================================================================================================
+
+\section{Ordenação por Seleção}
+
+
+
+\begin{frame}
+\frametitle{Ordenação por Seleção - \textit{Selection sort}}
+\begin{itemize}
+\item Um dos algoritmos mais simples de ordenação.
+\item Algoritmo:
+\begin{itemize}
+\item \textbf{Selecione} o menor item do vetor.
+\item Troque-o com o item da primeira posição do vetor.
+\item Repita essas duas operações com os $n-1$ itens restantes, depois
+com os $n-2$ itens, até que reste apenas um elemento
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordenação por Seleção - \textit{Selection sort}}
+
+i = 1
+
+\begin{table}
+    \begin{tabular}{l|l|lllllll}
+    j & Min & ~ & \textbf{1} & 2 & 3 & 4 & 5 & ~ \\ \hline
+    2 & 1 &$[$ & 3 & \underline{1} & 5 & 4 & 2 & $]$ \\ \pause
+    3 & 2 &$[$ & 3 & 1 & \underline{5} & 4 & 2 & $]$ \\ \pause
+    4 & 2 &$[$ & 3 & 1 & 5 & \underline{4} & 2 & $]$ \\ \pause
+    5 & 2 &$[$ & 3 & 1 & 5 & 4 & \underline{2} & $]$ \\ \hline \pause 
+    ~ & 2 &$[$ & \textbf{1} & \textbf{3} & \textbf{5} & \textbf{4} & \textbf{2} & $]$ \\
+    \end{tabular}
+\end{table}
+
+Vetor[1] = 1 \\
+Vetor[2] = 3
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Ordenação por Seleção - \textit{Selection sort}}
+
+i = 2
+
+\begin{table}
+    \begin{tabular}{l|l|lllllll}
+    j & Min & ~ & 1 & \textbf{2} & 3 & 4 & 5 & ~ \\ \hline   
+    3 & 2 &$[$ & \textbf{1} & 3 & \underline{5} & 4 & 2 & $]$ \\ \pause
+    4 & 2 &$[$ & \textbf{1} & 3 & 5 & \underline{4} & 2 & $]$ \\ \pause
+    5 & 2 &$[$ & \textbf{1} & 3 & 5 & 4 & \underline{2} & $]$ \\ \hline \pause 
+    ~ & 5 &$[$ & \textbf{1} & \textbf{2} & \textbf{5} & \textbf{4} & \textbf{3} & $]$ \\
+    \end{tabular}
+\end{table}
+
+Vetor[2] = 2 \\
+Vetor[5] = 3
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordenação por Seleção - \textit{Selection sort}}
+
+i = 3
+
+\begin{table}
+    \begin{tabular}{l|l|lllllll}
+    j & Min & ~ & 1 & 2 & \textbf{3} & 4 & 5 & ~ \\ \hline   
+    4 & 3 &$[$ & \textbf{1} & \textbf{2} & 5 & \underline{4} & 3 & $]$ \\ \pause
+    5 & 4 &$[$ & \textbf{1} & \textbf{2} & 5 & 4 & \underline{3} & $]$ \\ \hline \pause 
+    ~ & 5 &$[$ & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & $]$ \\
+    \end{tabular}
+\end{table}
+
+Vetor[3] = 3 \\
+Vetor[5] = 5
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordenação por Seleção - \textit{Selection sort}}
+
+i = 4
+
+\begin{table}
+    \begin{tabular}{l|l|lllllll}
+    j & Min & ~ & 1 & 2 & 3 & \textbf{4} & 5 & ~ \\ \hline   
+    5 & 4 &$[$ & \textbf{1} & \textbf{2} & \textbf{3} & 4 & \underline{5} & $]$ \\ \hline \pause 
+    ~ & 4 &$[$ & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & $]$ \\
+    \end{tabular}
+\end{table}
+
+Vetor[4] = 4 \\
+Vetor[4] = 4
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Ordenação por Seleção - \textit{Selection sort}}
+\begin{block}{Algoritmo em Java}
+\lstinputlisting[language=java, style=customc]{img/selecao.txt}
+\end{block}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Ordenação por Seleção - \textit{Selection sort}}
+
+\begin{itemize}
+
+\item Número de Comparações
+\begin{itemize}
+\item Melhor Caso: $n^2$
+\item Pior Caso: $n^2$
+\end{itemize}
+\item Número Movimentações
+\begin{itemize}
+\item Melhor Caso: $n$
+\item Pior Caso: $n$
+\end{itemize}
+
+\item Vantagens:
+\begin{itemize}
+\item Custo \textbf{linear} para o \textbf{número de movimentos} de registros.
+\item É o algoritmo a ser utilizado para arquivos com registros muito
+grandes.
+\item É muito interessante para arquivos pequenos.
+\end{itemize}
+\item Desvantagens:
+\begin{itemize}
+\item O fato de o arquivo já estar ordenado não ajuda em nada, pois o custo
+continua quadrático.
+\item O algoritmo \textbf{não é estável}.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Ordenação por Seleção - \textit{Selection sort}}
+\begin{itemize}
+\item Invente um vetor-exemplo de entrada para demonstrar que ordenação por Seleção é instável. Mostre os passos da execução do algoritmo até que a estabilidade seja violada 
+
+\pause
+
+\begin{table}
+    \begin{tabular}{lllll}
+    $[$ & \textcolor{green}{2} & \textcolor{blue}{2} & 1 & $]$ \\ \hline \pause
+    $[$ & \textcolor{green}{2} & \underline{\textcolor{blue}{2}} & 1 & $]$ \\ \pause
+    $[$ & \textcolor{green}{2} & \textcolor{blue}{2} & \underline{1} & $]$ \\ \hline \pause
+    $[$ & 1 & \textcolor{blue}{2} & \textcolor{green}{2} & $]$  \\ \pause
+    $[$ & 1 & \textcolor{blue}{2} & \underline{\textcolor{green}{2}} & $]$ \\ \hline  \pause
+    $[$ & 1 & \textcolor{blue}{2} & \textcolor{green}{2} & $]$
+   
+    \end{tabular}
+\end{table}
+
+
+
+
+
+\end{itemize}
+\end{frame}
+
+
+
+\section{Ordenação por Inserção}
+
+\begin{frame}
+\frametitle{Ordenação por Inserção - \textit{Insertion sort}}
+\begin{itemize}
+\item Método preferido dos jogadores de cartas.
+\begin{itemize}
+\item As cartas são ordenadas da esquerda para direita uma por uma. 
+\item O jogador escolhe a segunda carta e verifica se ela deve ficar antes ou na posição que está.
+\item Depois a terceira carta é classificada, deslocando-a até sua correta posição
+\item O jogador realiza esse procedimento até ordenar todas as cartas
+\end{itemize}
+\item Alto custo em remover uma carta de uma posição e colocá-la em outra quando a representação é por arranjos
+\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordernação por Inserção - \textit{Insertion sort}}
+
+i = 2
+
+\begin{table}
+    \begin{tabular}{l|l|lllllll}
+    j & Sentinela[0] & ~ & 1 & \textbf{2} & 3 & 4 & 5 & ~ \\ \hline
+    1 & \underline{1} &$[$ & \underline{3} & 1 & 5 & 4 & 2 & $]$ \\ \pause
+    ~ & 1 &$[$ & \textbf{1} & \textbf{3} & \textbf{5} & \textbf{4} & \textbf{2} & $]$ \\
+    \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordernação por Inserção - \textit{Insertion sort}}
+
+i = 3
+
+\begin{table}
+    \begin{tabular}{l|l|lllllll}
+    j & Sentinela[0] & ~ & 1 & 2 & \textbf{3} & 4 & 5 & ~ \\ \hline
+    2 & \underline{5} &$[$ & 1 & \underline{3} & 5 & 4 & 2 & $]$ \\ \pause
+    ~ & \underline{5} &$[$ & \textbf{1} & \textbf{3} & \textbf{5} & \textbf{4} & \textbf{2} & $]$ \\
+    \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordernação por Inserção - \textit{Insertion sort}}
+
+i = 4
+
+\begin{table}
+    \begin{tabular}{l|l|lllllll}
+    j & Sentinela[0] & ~ & 1 & 2 & 3 & \textbf{4} & 5 & ~ \\ \hline
+    3 & \underline{4} &$[$ & 1 & 3 & \underline{5} & 4 & 2 & $]$ \\ \pause
+    2 & \underline{4} &$[$ & 1 & \underline{3} & 4 & 5 & 2 & $]$ \\ \pause
+    ~ & \underline{4} &$[$ & \textbf{1} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{2} & $]$ \\
+    \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordernação por Inserção - \textit{Insertion sort}}
+
+i = 5
+
+\begin{table}
+    \begin{tabular}{l|l|lllllll}
+    j & Sentinela[0] & ~ & 1 & 2 & 3 & 4 & \textbf{5} & ~ \\ \hline
+	4 & \underline{2} &$[$ & 1 & 3 & 4 & \underline{5} & 2 & $]$ \\ \pause
+    3 & \underline{2} &$[$ & 1 & 3 & \underline{4} & 2 & 5 & $]$ \\ \pause
+    2 & \underline{2} &$[$ & 1 & \underline{3} & 2 & 4 & 5 & $]$ \\ \pause
+    ~ & \underline{2} &$[$ & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & $]$ \\
+    \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ordernação por Inserção - \textit{Insertion sort}}
+\begin{block}{Algoritmo em Java}
+\lstinputlisting[language=java, style=customc]{img/insercao.txt}
+\end{block}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Ordernação por Inserção - \textit{Insertion sort}}
+
+\begin{itemize}
+
+\item Número de Comparações
+\begin{itemize}
+\item Melhor Caso: $n$
+\item Pior Caso: $n^2$
+\end{itemize}
+\item Número Movimentações
+\begin{itemize}
+\item Melhor Caso: $n$
+\item Pior Caso: $n^2$
+\end{itemize}
+
+\item Características:
+\begin{itemize}
+\item O número mínimo de comparações e movimentos ocorre quando os itens estão originalmente em ordem.
+\item O número máximo ocorre quando os itens estão originalmente na ordem reversa.
+\item É o método a ser utilizado quando o arquivo está ``quase'' ordenado.
+\item É um bom método quando se deseja adicionar uns poucos itens a um arquivo ordenado, pois o custo é linear.
+\item O algoritmo de ordenação por inserção é \textbf{estável}.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Exercício}
+
+\begin{itemize}
+\item Dada a sequência de números: [3 4 9 2 5 1 8] Ordene em ordem crescente utilizando os três  algoritmos aprendidos em sala (Bolha, Seleção e Inserção), apresentado a sequência dos números a cada passo. 
+\end{itemize}
+
+\end{frame}
+
+%===================================================================================================	
+
+%\section{Dúvidas}
+
+\begin{frame}
+\frametitle{Referência}
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.5]{img/ref.png}
+\end{figure}
+ZIVIANI, Nivio. Projeto de algoritmos: com implementações em Java e C++. São Paulo: Thomson Learning, c2007. 621 p. 
+
+\end{frame}
+
+%===================================================================================================
+\end{document}
+%===================================================================================================

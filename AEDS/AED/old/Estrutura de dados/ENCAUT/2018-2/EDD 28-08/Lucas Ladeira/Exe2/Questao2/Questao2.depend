@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1535468608 source:e:\lucas ladeira\exe 2\questao2\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1535469682 source:e:\lucas ladeira\exe2\questao2\main.c
+	<stdio.h>
+	<stdlib.h>
+

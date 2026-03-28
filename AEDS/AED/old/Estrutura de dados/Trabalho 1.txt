@@ -1,0 +1,18 @@
+Complemente a implementação apresentada em sala de aula criando as seguintes subrotinas:
+Para Listas Lineares com Arranjo
+void InsereEm(TipoItem x , TipoLista *Lista, TipoApontador p)
+insere x na posição p deslocando todos os itens com índice >p para a direita
+ 
+void RetiraTodos(TipoItem x, TipoLista *Lista)
+Retira todos os itens semelhantes a x que estão na lista,
+deslocando os itens com a partir da posição removida para as posições anteriores.
+
+Para Listas Lineares com Apontadores
+void InsereEm(TipoItem x , TipoLista *Lista, int indice)
+Insere x na posição indice da lista
+
+void Retira(TipoApontador p, TipoLista *Lista)
+Retira da lista o elemento apontado por p
+
+void RetiraTodos(TipoItem x, TipoLista *Lista)
+Retira todos os itens semelhantes a x que estão na lista.

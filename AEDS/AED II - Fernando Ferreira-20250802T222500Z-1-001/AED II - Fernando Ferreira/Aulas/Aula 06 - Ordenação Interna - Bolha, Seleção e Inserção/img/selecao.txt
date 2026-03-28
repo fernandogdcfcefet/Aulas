@@ -1,0 +1,11 @@
+public static void selecao(Item v[], int n) {
+  for (int i = 1; i <= n - 1; i++) {
+    int min = i;
+    for (int j = i + 1; j <= n; j++)
+      if (v[j].chave() < v[min].chave())
+        min = j;
+    Item x = v[min];
+    v[min] = v[i];
+    v[i] = x;
+  }
+}

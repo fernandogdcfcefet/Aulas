@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1398099959 source:d:\google drive\puc minas\algoritmos e estrutura de dados ii\exercícios\lista 2 - resposta\lista2_solucao\main.cpp
+	<stdio.h>
+	<stdlib.h>
+	"Fila_Ponteiro.h"
+
+1398097353 d:\google drive\puc minas\algoritmos e estrutura de dados ii\exercícios\lista 2 - resposta\lista2_solucao\pilha_arranjo.h
+	<stdio.h>
+	<stdlib.h>
+
+1398094807 d:\google drive\puc minas\algoritmos e estrutura de dados ii\exercícios\lista 2 - resposta\lista2_solucao\pilha_ponteiro.h
+	<stdio.h>
+	<stdlib.h>
+
+1398099738 d:\google drive\puc minas\algoritmos e estrutura de dados ii\exercícios\lista 2 - resposta\lista2_solucao\fila_arranjo.h
+	<stdio.h>
+	<stdlib.h>
+
+1398100404 d:\google drive\puc minas\algoritmos e estrutura de dados ii\exercícios\lista 2 - resposta\lista2_solucao\fila_ponteiro.h
+	<stdio.h>
+	<stdlib.h>
+

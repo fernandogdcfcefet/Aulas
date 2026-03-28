@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1541515360 source:e:\prova edd 06-11\questão 3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+
