@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1472160544 source:d:\brenna\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+
+1472158245 source:d:\brenna 3.c
+	<stdio.h>
+	<conio.h>
+

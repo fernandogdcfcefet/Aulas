@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1535466876 source:e:\agustinho cássio s. netto\exe_03\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+

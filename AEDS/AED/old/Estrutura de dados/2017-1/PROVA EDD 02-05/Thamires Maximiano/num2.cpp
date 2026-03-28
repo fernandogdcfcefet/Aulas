@@ -1,0 +1,150 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
+#define MAX 10
+
+typedef int TipoChave;
+typedef struct {
+  int Chave;
+  /* outros componentes */
+} TipoItem;
+typedef struct TipoCelula *TipoApontador;
+typedef struct TipoCelula {
+  TipoItem Item;
+  TipoApontador Prox;
+} TipoCelula;
+typedef struct {
+  TipoApontador Fundo, Topo;
+  int Tamanho;
+} TipoPilha;
+
+void FPVazia(TipoPilha *Pilha)
+{ Pilha->Topo = (TipoApontador) malloc(sizeof(TipoCelula));
+  Pilha->Fundo = Pilha->Topo;
+  Pilha->Topo->Prox = NULL;
+  Pilha->Tamanho = 0;
+}
+
+int Vazia(TipoPilha Pilha)
+{ return (Pilha.Topo == Pilha.Fundo); }
+
+void Empilha(TipoItem x, TipoPilha *Pilha)
+{ TipoApontador Aux;
+  Aux = (TipoApontador) malloc(sizeof(TipoCelula));
+  Pilha->Topo->Item = x;
+  Aux->Prox = Pilha->Topo;
+  Pilha->Topo = Aux;
+  Pilha->Tamanho++;
+}
+
+void Desempilha(TipoPilha *Pilha, TipoItem *Item)
+{ TipoApontador q;
+  if (Vazia(*Pilha)) { printf("Erro: lista vazia\n"); return; }
+  q = Pilha->Topo;
+  Pilha->Topo = q->Prox;
+  *Item = q->Prox->Item;
+  free(q);  Pilha->Tamanho--;
+}
+
+int Tamanho(TipoPilha Pilha)
+{ return (Pilha.Tamanho); }
+
+void ImprimePilha(TipoPilha pilha) 
+{
+	if(Vazia(pilha))
+	{
+		printf("Lista Vazia\n");
+	}
+	else
+	{
+		TipoApontador aux;
+		aux=pilha.Topo;
+		while(aux->Prox!=NULL)
+		{
+			printf("%d\n", aux->Prox->Item.Chave);
+			aux=aux->Prox;
+		}
+	}
+}
+int main(int argc, char *argv[])
+{
+	TipoPilha p1,p2,p3;
+	TipoItem p,m,g;
+	FPVazia(&p1);
+	FPVazia(&p2);
+	FPVazia(&p3);
+	Vazia(p1);
+	Vazia(p2);
+	Vazia(p3);
+	p.Chave=1;
+	m.Chave=2;
+	g.Chave=3;
+	
+	Empilha(g,&p1);
+	Empilha(m,&p1);
+	Empilha(p,&p1);
+	ImprimePilha(p1);
+	ImprimePilha(p2);
+	ImprimePilha(p3);
+	printf("\n");
+	
+	Desempilha(&p1,&p);
+	Empilha(p,&p3);
+	ImprimePilha(p1);
+	ImprimePilha(p2);
+	ImprimePilha(p3);
+	printf("\n");
+	
+	Desempilha(&p1,&m);
+	Empilha(m,&p2);
+	ImprimePilha(p1);
+	ImprimePilha(p2);
+	ImprimePilha(p3);
+	printf("\n");
+	
+	Desempilha(&p3,&p);
+	Empilha(p,&p2);
+	ImprimePilha(p1);
+	ImprimePilha(p2);
+	ImprimePilha(p3);
+	printf("\n");
+	
+	Desempilha(&p1,&g);
+	Empilha(g,&p3);
+	ImprimePilha(p1);
+	ImprimePilha(p2);
+	ImprimePilha(p3);
+	printf("\n");
+	
+	Desempilha(&p2,&p);
+	Empilha(p,&p1);
+	ImprimePilha(p1);
+	ImprimePilha(p2);
+	ImprimePilha(p3);
+	printf("\n");
+	
+	Desempilha(&p2,&m);
+	Empilha(m,&p3);
+	ImprimePilha(p1);
+	ImprimePilha(p2);
+	ImprimePilha(p3);
+	printf("\n");
+	
+	Desempilha(&p1,&p);
+	Empilha(p,&p3);
+	ImprimePilha(p1);
+	ImprimePilha(p2);
+	ImprimePilha(p3);
+	printf("\n");
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

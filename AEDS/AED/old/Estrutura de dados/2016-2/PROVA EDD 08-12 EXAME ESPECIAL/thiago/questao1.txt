@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h> 
+#include <string.h> 
+#define TAM 2
+
+typedef  struct  {
+    char nome[100]; 
+    float notas [TAM];
+    int matricula;
+    /*  outros  componentes  */
+}  aluno;
+
+
+void cadastro(aluno a1[TAM]) {
+	int i,j; 
+	int media(aluno a1[TAM]);
+	for(i=0;i<TAM;i++){
+		printf("Informe o nome do aluno %i \n",i+1);
+		scanf("%s",&a1[i].nome);
+		fflush(stdin);
+		printf("Informe a matricula do aluno %i \n",i+1);
+		scanf("%i",&a1[i].matricula);
+		
+		for(j=0;j<TAM;j++){
+		printf("Informe as notas do aluno %f \n",i+1);
+		scanf("%i",&a1[i].notas[j]);
+    	}
+			
+	} 
+
+	media(a1);
+} 
+
+int media(aluno a1[TAM]){
+	
+	int i,j,indice;
+	float media,aux; 
+	float Nfinal[TAM];
+	for(i=0;i<TAM;i++){  
+	    media = 0;
+	   for (j=0;j<TAM;j++){
+	   
+	  media = media + a1[i].notas[j];
+	  
+    } 
+     Nfinal[i] = (media/TAM);
+     printf("%f \n",Nfinal[i]);
+   } 
+    aux=Nfinal[0];
+    for(i=1;i<TAM;i++){ 
+        if(Nfinal[i]>aux) {
+        	aux=Nfinal[i];
+        	indice=i;
+		}	
+	} 
+	printf("A maior nota sera do aluno: %s e a media sera %f \n",a1[indice].nome,aux);
+	
+}
+
+
+int main(){
+	aluno alu[TAM];
+	cadastro(alu);
+	
+	return 0;
+}

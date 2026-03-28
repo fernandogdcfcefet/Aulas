@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[brazilian]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+
+\usepackage{xcolor}
+\definecolor{verde}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+\lstset{
+  language=c,
+  basicstyle=\ttfamily\small, 
+  keywordstyle=\color{blue}, 
+  stringstyle=\color{verde}, 
+  commentstyle=\color{red}, 
+  extendedchars=true, 
+  showspaces=false, 
+  showstringspaces=false, 
+  numbers=left,
+  numberstyle=\tiny,
+  breaklines=true, 
+  backgroundcolor=\color{green!10},
+  breakautoindent=true, 
+  captionpos=b,
+  xleftmargin=0pt,
+}
+
+\begin{document}
+
+\title{Lista de Exercícios 4 - Listas}
+\author{PUC Minas - Engenharia de Computação \\ Algoritmos e Estrutura de Dados II \\ Prof. Kleber Jacques F. de Souza}
+\date{Data de Entrega: 29/04/2014}
+\maketitle
+
+%===================================================================================================
+
+\section*{Instruções}
+
+\begin{itemize}
+\item Esta é uma lista de reforço.
+\item A lista é individual e as datas de entrega são fixas, devendo o trabalho ser entregue 
+no início da aula. O valor desta lista é 5 pontos. Para cada dia de atraso na entrega 
+será descontado 0,5 ponto do valor da lista. 
+\end{itemize}
+
+%===================================================================================================
+
+\section*{Listas}
+
+\begin{enumerate}
+\item Implemente uma Lista para gerenciar dados do tipo \textbf{Pessoa}, onde Pessoa é uma ESTRUTURA com Código e Nome. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\item Implemente um procedimento CLONAR para a Lista, que retorna uma Lista exatamente igual à variável sobre a qual o método foi invocado. Implemente um para a versão usando arranjos e outro para a versão usando ponteiros.
+
+\item Implemente uma função que receba como parâmetro duas Listas e retorne uma terceira contendo a concatenação das duas. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\item Escreva uma função ``Pesquisa'' para a lista criada no exercício 1 que receba como parâmetro o nome de uma Pessoa e retorne seu código caso a Pessoa esteja na lista, caso contrário retorne -1. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\noindent \underline{DICA:} Use a função \textbf{strcmp}, da biblioteca \textbf{$<$string.h$>$} para realizar a comparação de \textit{strings}. \\
+
+\textbf{strcmp: int strcmp( const char *lhs, const char *rhs );} \\ \\
+Essa função compara duas strings segundo sua ordem alfabética e retorna um inteiro.
+Se esse inteiro for negativo, é porque a primeira \textit{string} é menor que a segunda.
+Se retornar um inteiro positivo, é porque a segunda \textit{string} é maior que a segunda.
+Se retornar 0, é porque as strings são idênticas.
+
+\item Utilizando a Lista criada no Exercício 1, implemente dois procedimentos que sejam capazes de ordenar a lista, um procedimento ordenando pelo código em ordem crescente e outro procedimento ordenando pelo nome em ordem alfabética. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\noindent \underline{DICA:} Utiliza algum algoritmo de ordenação visto em sala.
+
+\end{enumerate}
+
+
+
+
+
+
+%===================================================================================================
+
+\end{document}

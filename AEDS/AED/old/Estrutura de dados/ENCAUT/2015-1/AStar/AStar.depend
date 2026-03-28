@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1430940700 source:c:\users\samuel\desktop\estrutura de dados\2015-1\astar\main.cpp
+	<iostream>
+	<iomanip>
+	<queue>
+	<string>
+	<math.h>
+	<ctime>
+	<stdio.h>
+	<stdlib.h>
+

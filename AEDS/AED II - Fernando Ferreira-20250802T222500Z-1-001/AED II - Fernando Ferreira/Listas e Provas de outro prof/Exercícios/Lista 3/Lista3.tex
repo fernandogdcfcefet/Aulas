@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[brazilian]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+
+\usepackage{xcolor}
+\definecolor{verde}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+\lstset{
+  language=c,
+  basicstyle=\ttfamily\small, 
+  keywordstyle=\color{blue}, 
+  stringstyle=\color{verde}, 
+  commentstyle=\color{red}, 
+  extendedchars=true, 
+  showspaces=false, 
+  showstringspaces=false, 
+  numbers=left,
+  numberstyle=\tiny,
+  breaklines=true, 
+  backgroundcolor=\color{green!10},
+  breakautoindent=true, 
+  captionpos=b,
+  xleftmargin=0pt,
+}
+
+\begin{document}
+
+\title{Lista de Exercícios 3 - Filas}
+\author{PUC Minas - Engenharia de Computação \\ Algoritmos e Estrutura de Dados II \\ Prof. Kleber Jacques F. de Souza}
+\date{Data de Entrega: 29/04/2014}
+\maketitle
+
+%===================================================================================================
+
+\section*{Instruções}
+
+\begin{itemize}
+\item Esta é uma lista de reforço.
+\item A lista é individual e as datas de entrega são fixas, devendo o trabalho ser entregue 
+no início da aula. O valor desta lista é 5 pontos. Para cada dia de atraso na entrega 
+será descontado 0,5 ponto do valor da lista. 
+\end{itemize}
+
+%===================================================================================================
+
+\section*{Filas}
+
+\begin{enumerate}
+\item Implemente uma fila para gerenciar dados do tipo \textbf{Cliente}, onde Cliente é uma ESTRUTURA com Nome e Idade. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\item Implemente um procedimento CLONAR para a Fila, que retorna uma Fila exatamente igual à variável sobre a qual o método foi invocado. Implemente um para a versão usando arranjos e outro para a versão usando ponteiros.
+
+\item Implemente uma função que receba como parâmetro duas Filas e retorne uma terceira contendo a concatenação das duas. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\item Escreva um procedimento que inverta a ordem dos elementos na Fila. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros. \underline{DICA:} considera a utilização de estruturas auxiliares, como uma pilha.
+
+\item Em muitas situações é necessário que exista uma prioridade na Fila, como por exemplo em Bancos onde pessoas idosas têm prioridade no atendimento. Altere a Fila criada no exercício 1 para que a inserção na Fila seja feita por prioridade de idade, ou seja, se o Cliente que tiver mais de 65 anos deve ter prioridade no atendimento. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\noindent \underline{DICA:} Não é necessário criar a Fila toda novamente, apenas um novo procedimento de Enfileira por prioridade.
+
+\end{enumerate}
+
+
+
+
+
+
+%===================================================================================================
+
+\end{document}

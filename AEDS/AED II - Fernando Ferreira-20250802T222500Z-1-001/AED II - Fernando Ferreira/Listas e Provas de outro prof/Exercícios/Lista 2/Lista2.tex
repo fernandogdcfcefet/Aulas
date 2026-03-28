@@ -1,0 +1,142 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[brazilian]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+
+\usepackage{xcolor}
+\definecolor{verde}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+\lstset{
+  language=c,
+  basicstyle=\ttfamily\small, 
+  keywordstyle=\color{blue}, 
+  stringstyle=\color{verde}, 
+  commentstyle=\color{red}, 
+  extendedchars=true, 
+  showspaces=false, 
+  showstringspaces=false, 
+  numbers=left,
+  numberstyle=\tiny,
+  breaklines=true, 
+  backgroundcolor=\color{green!10},
+  breakautoindent=true, 
+  captionpos=b,
+  xleftmargin=0pt,
+}
+
+\begin{document}
+
+\title{Lista de Exercícios 2}
+\author{PUC Minas - Engenharia de Computação \\ Algoritmos e Estrutura de Dados II \\ Prof. Kleber Jacques F. de Souza}
+\date{Data de Entrega: 29/04/2014}
+\maketitle
+
+%===================================================================================================
+
+\section*{Instruções}
+
+\begin{itemize}
+\item Esta é uma lista de reforço.
+\item A lista é individual e as datas de entrega são fixas, devendo o trabalho ser entregue 
+no início da aula. O valor desta lista é 5 pontos. Para cada dia de atraso na entrega 
+será descontado 0,5 ponto do valor da lista. 
+\end{itemize}
+
+%===================================================================================================
+
+\section*{Pilhas}
+
+\begin{enumerate}
+\item Implemente uma pilha para gerenciar dados do tipo \textbf{CHAR}. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\item Implemente um procedimento CLONAR para a Pilha, que retorna uma pilha exatamente igual à variável sobre a qual o método foi invocado. Implemente um para a versão usando arranjos e outro para a versão usando ponteiros.
+
+\item Implemente uma função que receba como parâmetro duas pilhas e retorne uma terceira contendo a concatenação das duas. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\item Escreva um programa que utiliza a Pilha para verificar se os parênteses de uma expressão matemática representada por uma string estão corretos. O programa deve receber uma string do usuário e validar a ocorrência dos parênteses, ou seja, se todos os parênteses abertos foram fechados.
+
+Exemplo 1:
+
+\underline{Entrada}: (4+6)*(34+7)
+\underline{Saída}: Expressão Matemática Correta
+
+Exemplo 2:
+
+\underline{Entrada}: (4)+6)*(34+7)
+\underline{Saída}: Expressão Matemática Incorreta
+
+
+\item Alguns editores de texto permitem que algum caractere funcione como um ``cancela-caractere'', cujo efeito é o de cancelar o caractere anterior na linha que está sendo editada. Por exemplo, se `\#' é o cancela-caractere, então a sequência de caracteres PEM\#\#UB\#C corresponde à sequência PUC. Outro comando encontrado em editores de texto é o ``cancela-linha'', cujo efeito é o de cancelar todos os caracteres anteriores na linha que está sendo editada. Neste exemplo vamos considerar `/' como o caractere cancela-linha. Finalmente, outro comando encontrado em editores de texto é o ``salta-linha'', cujo efeito é o de causar a impressão dos caracteres que pertencem à linha que está sendo editada, iniciando uma nova linha de impressão a partir do caractere imediatamente seguinte ao caractere salta-linha. Por exemplo, se `@' é o salta-linha, então a sequência de caracteres ICEI@PUCMINAS.@ corresponde às duas linhas abaixo: 
+
+ICEI
+
+PUCMINAS.
+
+Implemente um Editor de Texto (ET) que aceite os três comandos descritos acima. O ET deverá ler um caractere de cada vez do texto de entrada e produzir a impressão linha a linha, cada linha contendo no máximo 70 caracteres de impressão. 
+
+A seguir é sugerido um texto para testar o programa ET, cujas características permitem exercitar todas as partes importantes do programa.
+
+
+Este et\# um teste para o ET, o extraterrestre em C.@Acabamos de testar a capacidade de o ET saltar de linha,
+utilizando seus poderes extras (cuidado, pois agora vamos estourar a capacidade máxima da linha de impressão, que é de 70
+caracteres.)@O k\#cut\#rso dh\#e Estruturas de Dados II et\# h\#um
+cuu\#rsh\#o \#x\# x?@!\#?!\#+.@ Como et\# bom
+n\#nt\#ao\#\#\# r\#ess\#tt\#ar mb\#aa\#triz\#cull\#ado nn\#x\#ele!/ Sera
+que este funciona/// O sinal? não\#\#\# deve ficar! ~
+
+
+\end{enumerate}
+
+\section*{Filas}
+
+\begin{enumerate}
+\item Implemente uma fila para gerenciar dados do tipo \textbf{Cliente}, onde Cliente é uma ESTRUTURA com Nome e Idade. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\item Implemente um procedimento CLONAR para a Fila, que retorna uma Fila exatamente igual à variável sobre a qual o método foi invocado. Implemente um para a versão usando arranjos e outro para a versão usando ponteiros.
+
+\item Implemente uma função que receba como parâmetro duas Filas e retorne uma terceira contendo a concatenação das duas. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\item Escreva um procedimento que inverta a ordem dos elementos na Fila. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros. \underline{DICA:} considera a utilização de estruturas auxiliares, como uma pilha.
+
+\item Em muitas situações é necessário que exista uma prioridade na Fila, como por exemplo em Bancos onde pessoas idosas têm prioridade no atendimento. Altere a Fila criada no exercício 1 para que a inserção na Fila seja feita por prioridade de idade, ou seja, se o Cliente que tiver mais de 65 anos deve ter prioridade no atendimento. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\noindent \underline{DICA:} Não é necessário criar a Fila toda novamente, apenas um novo procedimento de Enfileira por prioridade.
+
+\end{enumerate}
+
+\section*{Listas}
+
+\begin{enumerate}
+\item Implemente uma Lista para gerenciar dados do tipo \textbf{Pessoa}, onde Pessoa é uma ESTRUTURA com Código e Nome. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\item Implemente um procedimento CLONAR para a Lista, que retorna uma Lista exatamente igual à variável sobre a qual o método foi invocado. Implemente um para a versão usando arranjos e outro para a versão usando ponteiros.
+
+\item Implemente uma função que receba como parâmetro duas Listas e retorne uma terceira contendo a concatenação das duas. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\item Escreva uma função ``Pesquisa'' para a lista criada no exercício 1 que receba como parâmetro o nome de uma Pessoa e retorne seu código caso a Pessoa esteja na lista, caso contrário retorne -1. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\noindent \underline{DICA:} Use a função \textbf{strcmp}, da biblioteca \textbf{$<$string.h$>$} para realizar a comparação de \textit{strings}. \\
+
+\textbf{strcmp: int strcmp( const char *lhs, const char *rhs );} \\ \\
+Essa função compara duas strings segundo sua ordem alfabética e retorna um inteiro.
+Se esse inteiro for negativo, é porque a primeira \textit{string} é menor que a segunda.
+Se retornar um inteiro positivo, é porque a segunda \textit{string} é maior que a segunda.
+Se retornar 0, é porque as strings são idênticas.
+
+\item Utilizando a Lista criada no Exercício 1, implemente dois procedimentos que sejam capazes de ordenar a lista, um procedimento ordenando pelo código em ordem crescente e outro procedimento ordenando pelo nome em ordem alfabética. Implemente uma para a versão usando arranjos e outra para a versão usando ponteiros.
+
+\noindent \underline{DICA:} Utiliza algum algoritmo de ordenação visto em sala.
+
+\end{enumerate}
+
+
+
+
+
+%===================================================================================================
+
+\end{document}

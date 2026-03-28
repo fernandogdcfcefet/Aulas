@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1541512188 source:e:\fila\main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+
+1541514938 source:e:\Álvaro bastos de almeia pinheiro\fila\main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+

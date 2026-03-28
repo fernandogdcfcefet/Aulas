@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1535467294 source:e:\marcelagomes\ex3\main.c
+	<stdio.h>
+	<stdlib.h>
+

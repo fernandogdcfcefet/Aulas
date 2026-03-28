@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1711542420 source:/alunos/thiagopedrosa/prova/q1/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1535465941 source:c:\users\cefet\documents\1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

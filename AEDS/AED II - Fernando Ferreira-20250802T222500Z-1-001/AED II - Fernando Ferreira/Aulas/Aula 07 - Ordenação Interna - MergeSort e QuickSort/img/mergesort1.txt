@@ -1,0 +1,8 @@
+public static void MergeSort(Item v[], int inicio, int fim) {
+  if (inicio < fim) {
+    int meio = (inicio + fim) / 2;
+    MergeSort(v, inicio, meio);
+    MergeSort(v, meio + 1, fim);
+    merge(v, inicio, meio, fim);
+  }
+}

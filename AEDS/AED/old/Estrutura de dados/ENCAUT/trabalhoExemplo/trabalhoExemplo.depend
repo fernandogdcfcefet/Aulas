@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1418929758 source:c:\users\samuk\desktop\estrutura de dados\trabalhoexemplo\main.c
+	<windows.h>
+	<gl/gl.h>
+
+1527343472 source:c:\users\alves\onedrive\Área de trabalho\estrutura de dados\trabalhoexemplo\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+

@@ -1,0 +1,11 @@
+void RetiraTodos(TipoLista *Lista, TipoItem Item){
+    TipoApontador aux=Lista->Primeiro;
+    while(aux->Prox!=NULL){
+        if(aux->Prox->Item.Chave==Item.Chave){
+            TipoItem x;
+            Retira(aux,Lista,&x);
+
+        }else
+        aux=aux->Prox;
+    }
+}

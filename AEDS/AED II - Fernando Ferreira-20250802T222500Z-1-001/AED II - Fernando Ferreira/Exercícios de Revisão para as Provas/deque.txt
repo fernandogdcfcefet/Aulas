@@ -1,0 +1,1 @@
+12-	Considere a TAD Deque estudada em sala e implemente uma função booleana para verificar se uma palavra é um palíndromo. Neste exercício você deve utilizar somente as operações de uma TAD Deque. Estruturas de repetição, recursividade, arquivos, vetores e outras estruturas de dados não são permitidos. 

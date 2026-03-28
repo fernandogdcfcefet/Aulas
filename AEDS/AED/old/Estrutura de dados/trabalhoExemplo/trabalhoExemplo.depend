@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1418929758 source:c:\users\samuk\desktop\estrutura de dados\trabalhoexemplo\main.c
+	<windows.h>
+	<gl/gl.h>
+

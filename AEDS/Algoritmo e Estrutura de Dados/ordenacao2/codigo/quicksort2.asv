@@ -1,0 +1,38 @@
+function [contador] = quicksort2(vetor)
+
+    l = 1;
+    h = length(vetor);
+    pilha(h-l+1) = 0;
+    pilha(1) = l;
+    pilha(2) = h;
+    top = 2;
+    
+    contador = 0;
+    
+    while(top >= 1)
+                
+        h = pilha(top);
+        top = top-1;
+        l = pilha(top);
+        top = top-1;
+        
+        
+        [p, vetor, contador] = particao(vetor, contador);
+        
+        if((p-1) > l)
+            top = top+1;
+            pilha(top) = l;
+            top = top+1;
+            pilha(top) = p-1;
+        end
+        
+        if((p+1) < h)
+            top = top+1;
+            pilha(top) = p+1;
+            top = top+1;
+            pilha(top) = h;
+        end
+        
+    end
+    
+end

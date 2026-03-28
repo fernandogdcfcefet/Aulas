@@ -1,0 +1,9 @@
+Linha 23:
+	
+	Começa por uma estrutura condicional (if), dividida em duas condições dependentes (&&) que utilizando-se o strcmp, que compara todas as 	posições entre dois vetores de caracteres, e, se forem iguais retorna o valor inteiro 0.
+
+		Na primeira: Compara-se o vetor rua na posição i, com o vetor rua na posição j.
+			
+		Na segunda: Compara-se o vetor nome na posição i, com o nome rua na posição j.
+			
+	Caso as duas condições sejam verdadeiras, será impresso o nome na posição j e uma quebra de linha "\n".

@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[brazilian]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+
+\usepackage{xcolor}
+\definecolor{verde}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+\lstset{
+  language=c,
+  basicstyle=\ttfamily\small, 
+  keywordstyle=\color{blue}, 
+  stringstyle=\color{verde}, 
+  commentstyle=\color{red}, 
+  extendedchars=true, 
+  showspaces=false, 
+  showstringspaces=false, 
+  numbers=left,
+  numberstyle=\tiny,
+  breaklines=true, 
+  backgroundcolor=\color{green!10},
+  breakautoindent=true, 
+  captionpos=b,
+  xleftmargin=0pt,
+}
+
+\begin{document}
+
+\title{Lista de Exercícios 5 - Super Lista}
+\author{PUC Minas - Engenharia de Computação \\ Algoritmos e Estrutura de Dados II \\ Prof. Kleber Jacques F. de Souza}
+\date{}
+\maketitle
+
+%===================================================================================================
+
+\section*{Instruções}
+
+\begin{itemize}
+\item Esta é uma lista de reforço e vale 2 pontos
+\item No dia 15/04 deve ser entregue a versão manuscrita do código solicitado (1 ponto)
+\item No dia 21/04 deve ser entregue uma versão do código fonte do código solicitado implementado (1 ponto)
+\end{itemize}
+
+%===================================================================================================
+
+\section*{Super Lista}
+
+Desenvolva um Tipo Abstrato de Dado (TAD) chamado \textbf{Super Lista} que execute todas as operações abaixo:
+
+\begin{enumerate}
+\item Inserir um dado no começo da lista
+\item Inserir um dado no fim da lista
+\item Inserir um dado na posição $p$ da lista
+\item Verificar se a lista está vazia
+\item Retornar o tamanho da lista
+\item Imprimir os dados da lista
+\item Imprimir os dados da lista em ordem crescente
+\item Remover um dado do começo da lista
+\item Remover um dado do fim da lista
+\item Remover um dado da posição $p$ da lista
+\item Pesquisar um elemento $e$ está na lista
+\item Verificar quantas vezes um elemento $e$ se repete na lista
+
+\end{enumerate}
+
+\textbf{A sua implementação deve ser feita utilizando alocação dinâmica de memória e ponteiros!}
+
+
+%===================================================================================================
+
+\end{document}

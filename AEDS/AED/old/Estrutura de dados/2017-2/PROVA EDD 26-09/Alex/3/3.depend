@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1506439472 source:e:\prova alex\3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/time.h>
+

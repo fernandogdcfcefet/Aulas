@@ -1,0 +1,111 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef  int  TipoChave;
+typedef  struct  {
+int  Chave;
+/*  outros  componentes  */
+}  TipoItem;
+typedef  struct  TipoCelula  *TipoApontador;
+typedef  struct  TipoCelula  {
+    TipoItem  Item;
+    TipoApontador  Prox;
+}  TipoCelula;
+typedef  struct  {
+    TipoApontador  Fundo,  Topo;
+    int  Tamanho;
+}  TipoPilha ;
+
+void  FPVazia( TipoPilha  *Pilha)
+{
+    Pilha->Topo =  (TipoApontador)  malloc( sizeof ( TipoCelula ) ) ;
+    Pilha->Fundo =  Pilha->Topo;
+    Pilha->Topo->Prox  = NULL;
+    Pilha->Tamanho =  0;
+}
+int  Vazia( TipoPilha  Pilha)
+{
+    return  ( Pilha .Topo == Pilha .Fundo) ;
+}
+
+void  Empilha(TipoItem  x ,	TipoPilha  *Pilha)
+{
+    TipoApontador  Aux;
+    Aux =  (TipoApontador)  malloc( sizeof ( TipoCelula ) ) ;
+    Pilha->Topo->Item  =  x;
+    Aux->Prox  =  Pilha->Topo;
+    Pilha->Topo = Aux; Pilha->Tamanho++;
+}
+
+void  Desempilha( TipoPilha  *Pilha ,  TipoItem  *Item)
+{
+    TipoApontador  q;
+    if	( Vazia(*Pilha ) )  {
+            printf ( "Erro: lista vazia\n");
+            return ;
+    }
+    q =  Pilha->Topo;
+    Pilha->Topo =  q->Prox ;
+    *Item  =  q->Prox->Item ;
+    free (q) ;
+    Pilha->Tamanho--;
+}
+
+int  Tamanho( TipoPilha  Pilha)
+{
+    return  ( Pilha .Tamanho) ;
+}
+
+void  Imprime( TipoPilha  Lista )
+{
+    TipoApontador  Aux;
+    Aux =  Lista.Topo->Prox ;
+    while  (Aux  !=  NULL){
+        printf ( "%c\n",  Aux->Item.Chave) ;
+        Aux = Aux->Prox ;
+        
+    }
+    printf("\n");
+}
+/*void Verifica(TipoPilha PilhaVericar){
+	TipoPilha Pilha2;
+	TipoApontador  Aux;
+    Aux =  PilhaVericar.Topo->Prox ;
+    while  (Aux  !=  NULL){
+    	
+        Desempilha(&PilhaVericar, Aux->Item.Chave);
+		Empilha(Aux->Item.Chave, &Pilha2);
+        Aux = Aux->Prox ;  
+    }
+}*/
+
+int main()
+{
+	TipoPilha p1;
+	TipoItem a;
+	TipoItem b;
+	TipoItem c;
+	TipoItem d;
+	TipoItem e;
+
+	a.Chave='a';
+	b.Chave='r';
+	c.Chave='a';
+	d.Chave='r';
+	e.Chave='a';	
+	
+	
+	FPVazia(&p1);
+	Empilha(a, &p1);
+	Empilha(b, &p1);
+	Empilha(c, &p1);
+	Empilha(d, &p1);
+	Empilha(e, &p1);
+	
+	Imprime(p1);
+			
+	//Verifica(p1);
+    system("pause");
+    return 0;
+}
+

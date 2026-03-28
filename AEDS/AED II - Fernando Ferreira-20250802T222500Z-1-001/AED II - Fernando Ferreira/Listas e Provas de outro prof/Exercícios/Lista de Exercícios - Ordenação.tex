@@ -1,0 +1,175 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Trabalho de Sistemas Distribuídos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,brazil, a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preambulo - Configuração de página
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{color}
+\usepackage[portuges]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[ansinew]{inputenc}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{epsfig}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\usepackage{tikz}
+\usetikzlibrary{3d}
+\usetikzlibrary{calc,decorations.pathmorphing} % noisy shapes
+\usetikzlibrary{fit}					% fitting shapes to coordinates
+\usetikzlibrary{backgrounds}	% drawing the background after the foreground
+\usetikzlibrary{shadows}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{positioning,shapes,shadows,arrows}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+\usetikzlibrary{arrows,shapes}
+
+\pagestyle{empty}
+
+% Define margem no topo como sendo 1,7 cm
+\setlength{\topmargin}{0pt}
+\setlength{\voffset}{-1.8cm}
+
+%define margem inferior como 1,5 cm
+\setlength{\textheight}{25,6cm}
+
+%define margens laterais como sendo 1,5 cada
+\setlength{\oddsidemargin}{0cm}
+\setlength{\hoffset}{-1.2cm}
+\setlength{\textwidth}{18cm}
+
+%Define campo com sombreamento cinza
+\newcolumntype{G}{>{\columncolor[gray]{0.8}[\tabcolsep]\tiny \bf \sf}p{13pt}<{\centering}}
+\newcolumntype{T}{>{\tiny \sf}p{13pt}<{\centering}}
+
+
+\usepackage{xcolor}
+\definecolor{verde}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+\lstset{
+	language=c,
+	basicstyle=\ttfamily\normalsize, 
+	keywordstyle=\color{blue}, 
+	stringstyle=\color{verde}, 
+	commentstyle=\color{red}, 
+	extendedchars=true, 
+	showspaces=false, 
+	showstringspaces=false, 
+	numbers=left,
+	numberstyle=\tiny,
+	breaklines=true, 
+	breakautoindent=true, 
+	captionpos=b,
+	xleftmargin=0pt,
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inicio do documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+	\selectlanguage{brazil}
+	
+	\hspace{-0.8cm} \begin{tabular*}{18cm}{p{2cm}p{12cm}@{\extracolsep{\fill}}}
+		\multirow{2}{2cm}{\epsfig{file=puclogo_small_bw,width=1.5cm}}
+		&  \vspace{1mm} \usefont{T1}{cmss}{bx}{n} {\centering PONTIFÍCIA UNIVERSIDADE CATÓLICA DE MINAS GERAIS }\\
+		&  \usefont{T1}{cmss}{x}{n} Instituto de Ciências Exatas e Informática \vspace{3mm}  \\
+	\end{tabular*}
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Define caracteristicas da disciplina
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hspace{-0.8cm} \begin{tabular*}{18.5cm}{|p{7cm}@{\extracolsep{\fill}}|p{6cm}|p{1.7cm}|}
+		\hline
+		\sf Disciplina & \sf Curso  & \sf Período \\
+		
+		\multicolumn{1}{|r|}{Algoritmos e Estruturas de Dados II} &
+		\multicolumn{1}{c|}{Engenharia de Computação} &
+		\multicolumn{1}{c|}{2$^\circ$} \\ \hline \hline
+		\multicolumn{3}{|l|}{\sf Professor} \\
+		\multicolumn{3}{|l|}{\hspace{1cm}Kleber Jacques F. de Souza (klebersouza@pucminas.br)} \\ \hline
+	\end{tabular*}
+	
+	
+	\vspace{0.1cm}
+	
+	
+	\begin{center}
+		{\Large \bf Lista de Exercícios - Ordenação} \\
+		%{\normalsize \bf em dupla}
+	\end{center}
+	
+
+%===================================================================================================
+
+
+\begin{enumerate}
+
+\item Analise o código abaixo e faça:
+
+\begin{enumerate}
+	\item execute-o passo a passo no caderno, descrevendo todas as saídas impressas na tela para o usuário. 
+	\item Tente descobrir qual o comportamento deste algoritmo de ordenação.
+	\item Este algoritmo se parece com algum algoritmo já estudado? Se sim, qual?
+\end{enumerate}
+
+\begin{lstlisting}
+void printVetor(int *vet, int n){
+	for(int i=0; i<n; i++)
+		printf("%d ",vet[i]);
+	printf("\n");
+}
+void shellSort(int *vet, int n) {
+  int h = 1;
+  while(h < n) {
+    h = 3*h+1;
+  }
+  while ( h > 1) {
+    h /= 3;
+    for(int i = h; i < n; i++) {
+      int value = vet[i];
+      int j = i - h;
+      printf("H=%d, Compara se %d < %d\n",h,value,vet[j]);
+      while (j >= 0 && value < vet[j]) {
+        printf("H=%d, Troucou: %d %d\n",h,vet [j + h],vet[j]);
+        vet [j + h] = vet[j];
+        j -= h;
+      }
+      vet [j + h] = value;
+      printVetor(vet,n);
+    }
+  }
+}
+int main(int argc, char *argv[]){
+	int v[] = {15,14,13,12,11,10,9,8,7,6,5,4,3,2,1};
+	int n = sizeof(v)/sizeof(int);	
+	printf("Antes de Ordenar:\n");
+	printVetor(v,n);
+	shellSort(v,n);
+	printf("Depois de Ordenar:\n");
+	printVetor(v,n);	
+	return 0;
+}
+
+\end{lstlisting}
+ 
+
+\end{enumerate}
+
+
+
+
+
+
+%===================================================================================================
+
+\end{document}

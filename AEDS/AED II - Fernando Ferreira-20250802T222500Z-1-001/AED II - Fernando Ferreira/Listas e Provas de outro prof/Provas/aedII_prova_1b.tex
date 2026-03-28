@@ -1,0 +1,173 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Trabalho de Sistemas Distribuídos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,brazil, a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preambulo - Configuração de página
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{color}
+\usepackage[portuges]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[ansinew]{inputenc}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{epsfig}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\usepackage{tikz}
+\usetikzlibrary{3d}
+\usetikzlibrary{calc,decorations.pathmorphing} % noisy shapes
+\usetikzlibrary{fit}					% fitting shapes to coordinates
+\usetikzlibrary{backgrounds}	% drawing the background after the foreground
+\usetikzlibrary{shadows}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{positioning,shapes,shadows,arrows}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+\usetikzlibrary{arrows,shapes}
+
+\pagestyle{empty}
+
+% Define margem no topo como sendo 1,7 cm
+\setlength{\topmargin}{0pt}
+\setlength{\voffset}{-1.8cm}
+
+%define margem inferior como 1,5 cm
+\setlength{\textheight}{25,6cm}
+
+%define margens laterais como sendo 1,5 cada
+\setlength{\oddsidemargin}{0cm}
+\setlength{\hoffset}{-1.2cm}
+\setlength{\textwidth}{18cm}
+
+%Define campo com sombreamento cinza
+\newcolumntype{G}{>{\columncolor[gray]{0.8}[\tabcolsep]\tiny \bf \sf}p{13pt}<{\centering}}
+\newcolumntype{T}{>{\tiny \sf}p{13pt}<{\centering}}
+
+
+\usepackage{xcolor}
+\definecolor{verde}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+\lstset{
+	language=c,
+	basicstyle=\ttfamily\small, 
+	keywordstyle=\color{blue}, 
+	stringstyle=\color{verde}, 
+	commentstyle=\color{red}, 
+	extendedchars=true, 
+	showspaces=false, 
+	showstringspaces=false, 
+	numbers=left,
+	numberstyle=\tiny,
+	breaklines=true, 
+	backgroundcolor=\color{green!10},
+	breakautoindent=true, 
+	captionpos=b,
+	xleftmargin=0pt,
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inicio do documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+	\selectlanguage{brazil}
+	
+	\hspace{-0.8cm} \begin{tabular*}{18cm}{p{2cm}p{12cm}@{\extracolsep{\fill}}}
+		\multirow{2}{2cm}{\epsfig{file=puclogo_small_bw,width=1.5cm}}
+		&  \vspace{1mm} \usefont{T1}{cmss}{bx}{n} {\centering \footnotesize PONTIFÍCIA UNIVERSIDADE CATÓLICA DE MINAS GERAIS }\\
+		&  \usefont{T1}{cmss}{x}{n} Instituto de Ciências Exatas e Informática \vspace{3mm}  \\
+	\end{tabular*}
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Define caracteristicas da disciplina
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\hspace{-0.8cm} \begin{tabular*}{18.5cm}{|p{7cm}@{\extracolsep{\fill}}|p{6cm} p{1.7cm}|}
+		\hline
+		\sf Disciplina & \sf Professor  &  \\
+		
+		\multicolumn{1}{|r|}{Algoritmos e Estruturas de Dados} &
+		\multicolumn{2}{c|}{Kleber Jacques F. de Souza (klebersouza@pucminas.br)} \\ \hline
+		
+	\end{tabular*}
+	
+	
+	\vspace{0.1cm}
+	
+	
+	\begin{center}
+		{\Large \bf Avaliação 1B} \\
+		%{\normalsize \bf em dupla}
+	\end{center}
+	
+
+\begin{flushleft}
+	\textbf{Nome:}  \makebox[5.0in]{\hrulefill}\textbf{Nota:}  \makebox[0.85in]{\hrulefill}\\ 
+\end{flushleft} 
+
+\section*{Instruções}
+
+\begin{itemize}
+\footnotesize
+\item A interpretação das questões faz parte da avaliação.
+\item Coloque as observações que julgar necessárias na solução das questões.
+\end{itemize}
+
+%===================================================================================================
+\section*{Questões}
+\begin{enumerate}
+	
+	\item (2,5 pontos) Desenvolva uma função recursiva que calcule a multiplicação de dois números naturais, através de somas sucessivas (Ex.: 6 * 4 = 4+4+4+4+4+4). Sua função deve receber como parâmetro os dois números naturais e retornar a multiplicação dos dois.
+	
+	\item (2,5 pontos) Desenvolva uma função recursiva que receba como parâmetro um vetor de inteiros e retorne o valor do maior elemento presente no vetor.	
+	
+	\item (5,0 pontos) Altere a especificação do programa ET (Editor de Texto da Lista de Pilha) para aceitar o comando cancela palavra, cujo efeito é cancelar a palavra anterior na linha que está sendo digitada. Por exemplo, se `\$' é o CancelaPalavra, então a sequencia de caracteres NÃO CANCELA\$\$ CANCELA LINHA\$ PALAVRA corresponde à sequência CANCELA PALAVRA.
+	
+	\item (5,0 pontos) Existem partes de sistemas operacionais que cuidam da ordem em que os programas devem ser executados. Por exemplo, em um sistema de computação de tempo-compartilhado (do inglês \textit{time-shared}) existe a necessidade de manter um conjunto de processos em uma fila, esperando para serem executados.
+	
+	Escreva um programa que seja capaz de ler uma série de solicitações para:
+	
+	\begin{itemize}
+		\item Incluir novos processos na fila de processos
+		\item Retirar da fila de processos o processo com o maior tempo de espera
+		\item Imprimir o conteúdo da lista de processos
+	\end{itemize}
+	
+	Assuma que cada processo é representado por um registro composto por um número identificador de processo.
+	
+	\item (5,0 pontos) Considere a implementação de uma TAD lista. Considere que cada item da lista é uma estrutura do tipo \textbf{Aluno} com os seguintes campos: Matrícula (inteiro), Nome (texto) e Idade (inteiro). Assuma que os métodos básicos já foram implementados (Inicializar, Vazia, Inserir, Remover e Tamanho).
+	
+	\begin{itemize}
+		\item Desenvolva um procedimento que retorne a Matricula, o Nome e a Idade do Aluno mais novo presente na lista.
+		\item Desenvolva um procedimento que ordene os dados presentes na lista por ordem alfabética.
+	\end{itemize}	
+	
+	
+\end{enumerate}
+
+\subsubsection*{Especificação do programa ET}
+
+Alguns editores de texto permitem que algum caractere funcione como um ``cancela-caractere'', cujo efeito é o de cancelar o caractere anterior na linha que está sendo editada. Por exemplo, se `\#' é o cancela-caractere, então a sequência de caracteres PEM\#\#UB\#C corresponde à sequência PUC. Outro comando encontrado em editores de texto é o ``cancela-linha'', cujo efeito é o de cancelar todos os caracteres anteriores na linha que está sendo editada. Neste exemplo vamos considerar `/' como o caractere cancela-linha. Finalmente, outro comando encontrado em editores de texto é o ``salta-linha'', cujo efeito é o de causar a impressão dos caracteres que pertencem à linha que está sendo editada, iniciando uma nova linha de impressão a partir do caractere imediatamente seguinte ao caractere salta-linha. Por exemplo, se `@' é o salta-linha, então a sequência de caracteres ICEI@PUCMINAS.@ corresponde às duas linhas abaixo: 
+
+ICEI
+
+PUCMINAS.
+
+Implemente um Editor de Texto (ET) que aceite os três comandos descritos acima. O ET deverá ler um caractere de cada vez do texto de entrada e produzir a impressão linha a linha, cada linha contendo no máximo 70 caracteres de impressão. 
+
+\begin{flushright}
+	\textbf{Boa Prova!} 
+\end{flushright} 
+
+
+
+%===================================================================================================
+
+\end{document}

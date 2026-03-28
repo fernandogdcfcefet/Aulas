@@ -1,0 +1,50 @@
+/************************************************************************/
+/* IPB Unlimited - IP.Board 3.2 Skin by Tom Christian                   */
+/************************************************************************/
+/* tomchristian.co.uk							*/
+/************************************************************************/
+.custom_theme {
+	background: url(http://forum.codecall.net/public/style_images/tctc91_unlimited/_custom/sprite_icons.png) repeat scroll 6px 5px rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+	float: right;
+	height: 30px;
+	margin-right: 4px;
+	width: 31px;
+	display: inline-block;
+}
+
+.custom_theme:hover { background-color: rgba(0, 0, 0, 0.5); }
+.custom_theme a { padding: 0 !important; }
+
+#branding {
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+/****************************************/
+/* Text-Based Header Logo               */
+/****************************************/
+#branding .siteLogo { 
+    display: inline-block;
+    max-height: 33px;
+    margin-top: 15px;
+}
+
+#branding .siteLogo h1 { 
+    color: #FFFFFF;
+    display: inline-block;
+    float: left;
+    font: 20pt arial;
+    margin-right: 9px;
+    text-shadow: 1px 1px 2px #193147;
+}
+
+#branding .siteLogo span { 
+    color: #111111;
+    display: block;
+    float: left;
+    font: bold 9pt arial;
+    padding-top: 10px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+}

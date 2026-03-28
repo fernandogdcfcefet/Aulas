@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1418993492 source:c:\users\samuk\desktop\estrutura de dados\exemplotrabalho\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

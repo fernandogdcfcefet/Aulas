@@ -1,0 +1,26 @@
+public static void QuickSort(Item v[], int esquerda, int direita) {
+  Item temp, pivo;
+  int i, j;
+  i = esquerda;
+  j = direita;
+  pivo = v[(esquerda + direita) / 2];
+
+  while (i <= j) {
+    while (v[i].chave() < pivo.chave() && i < direita) i++;
+    while (v[j].chave() > pivo.chave() && j > esquerda) j--;
+
+    if (i <= j) {
+      temp = v[i];
+      v[i] = v[j];
+      v[j] = temp;
+      i++;
+      j--;
+    }
+  }
+
+  if (j > esquerda)
+    QuickSort(v, esquerda, j);
+
+  if (i < direita)
+    QuickSort(v, i, direita);
+}
